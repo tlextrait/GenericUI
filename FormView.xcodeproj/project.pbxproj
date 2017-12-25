@@ -9,23 +9,49 @@
 /* Begin PBXBuildFile section */
 		E9C185E91FE9BF1E00857300 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C185E81FE9BF1E00857300 /* AppDelegate.swift */; };
 		E9C185EB1FE9BF1E00857300 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C185EA1FE9BF1E00857300 /* ViewController.swift */; };
-		E9C185EE1FE9BF1E00857300 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9C185EC1FE9BF1E00857300 /* Main.storyboard */; };
 		E9C185F01FE9BF1E00857300 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9C185EF1FE9BF1E00857300 /* Assets.xcassets */; };
-		E9C185F31FE9BF1E00857300 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9C185F11FE9BF1E00857300 /* LaunchScreen.storyboard */; };
+		E9C185FD1FE9C4C800857300 /* UIQuickFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C185FC1FE9C4C800857300 /* UIQuickFormView.swift */; };
+		E9C185FF1FE9CA4C00857300 /* UIInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C185FE1FE9CA4C00857300 /* UIInputField.swift */; };
+		E9C186011FE9CC8C00857300 /* StringTwoWayConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C186001FE9CC8B00857300 /* StringTwoWayConvertible.swift */; };
+		E9C186031FE9D8F500857300 /* UIActiveInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C186021FE9D8F500857300 /* UIActiveInput.swift */; };
+		E9C1860B1FEDD09600857300 /* FormViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C1860A1FEDD09600857300 /* FormViewTests.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E9C1860D1FEDD09600857300 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E9C185DD1FE9BF1E00857300 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E9C185E41FE9BF1E00857300;
+			remoteInfo = FormView;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		E909B6771FEED87F006ECAC1 /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
 		E9C185E51FE9BF1E00857300 /* FormView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FormView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9C185E81FE9BF1E00857300 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9C185EA1FE9BF1E00857300 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		E9C185ED1FE9BF1E00857300 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E9C185EF1FE9BF1E00857300 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E9C185F21FE9BF1E00857300 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E9C185F41FE9BF1E00857300 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E9C185FC1FE9C4C800857300 /* UIQuickFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIQuickFormView.swift; sourceTree = "<group>"; };
+		E9C185FE1FE9CA4C00857300 /* UIInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIInputField.swift; sourceTree = "<group>"; };
+		E9C186001FE9CC8B00857300 /* StringTwoWayConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTwoWayConvertible.swift; sourceTree = "<group>"; };
+		E9C186021FE9D8F500857300 /* UIActiveInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIActiveInput.swift; sourceTree = "<group>"; };
+		E9C186081FEDD09600857300 /* FormViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FormViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9C1860A1FEDD09600857300 /* FormViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewTests.swift; sourceTree = "<group>"; };
+		E9C1860C1FEDD09600857300 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		E9C185E21FE9BF1E00857300 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9C186051FEDD09600857300 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -39,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				E9C185E71FE9BF1E00857300 /* FormView */,
+				E9C186091FEDD09600857300 /* FormViewTests */,
 				E9C185E61FE9BF1E00857300 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -47,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				E9C185E51FE9BF1E00857300 /* FormView.app */,
+				E9C186081FEDD09600857300 /* FormViewTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -55,13 +83,41 @@
 			isa = PBXGroup;
 			children = (
 				E9C185E81FE9BF1E00857300 /* AppDelegate.swift */,
-				E9C185EA1FE9BF1E00857300 /* ViewController.swift */,
-				E9C185EC1FE9BF1E00857300 /* Main.storyboard */,
 				E9C185EF1FE9BF1E00857300 /* Assets.xcassets */,
-				E9C185F11FE9BF1E00857300 /* LaunchScreen.storyboard */,
+				E9C185FB1FE9BFAB00857300 /* FormView */,
 				E9C185F41FE9BF1E00857300 /* Info.plist */,
+				E9C185FA1FE9BF4100857300 /* View Controllers */,
+				E909B6771FEED87F006ECAC1 /* Notes.md */,
 			);
 			path = FormView;
+			sourceTree = "<group>";
+		};
+		E9C185FA1FE9BF4100857300 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E9C185EA1FE9BF1E00857300 /* ViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		E9C185FB1FE9BFAB00857300 /* FormView */ = {
+			isa = PBXGroup;
+			children = (
+				E9C186001FE9CC8B00857300 /* StringTwoWayConvertible.swift */,
+				E9C186021FE9D8F500857300 /* UIActiveInput.swift */,
+				E9C185FE1FE9CA4C00857300 /* UIInputField.swift */,
+				E9C185FC1FE9C4C800857300 /* UIQuickFormView.swift */,
+			);
+			path = FormView;
+			sourceTree = "<group>";
+		};
+		E9C186091FEDD09600857300 /* FormViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				E9C1860A1FEDD09600857300 /* FormViewTests.swift */,
+				E9C1860C1FEDD09600857300 /* Info.plist */,
+			);
+			path = FormViewTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -84,6 +140,24 @@
 			productReference = E9C185E51FE9BF1E00857300 /* FormView.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E9C186071FEDD09600857300 /* FormViewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E9C1860F1FEDD09600857300 /* Build configuration list for PBXNativeTarget "FormViewTests" */;
+			buildPhases = (
+				E9C186041FEDD09600857300 /* Sources */,
+				E9C186051FEDD09600857300 /* Frameworks */,
+				E9C186061FEDD09600857300 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E9C1860E1FEDD09600857300 /* PBXTargetDependency */,
+			);
+			name = FormViewTests;
+			productName = FormViewTests;
+			productReference = E9C186081FEDD09600857300 /* FormViewTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -97,6 +171,11 @@
 					E9C185E41FE9BF1E00857300 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+					};
+					E9C186071FEDD09600857300 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = E9C185E41FE9BF1E00857300;
 					};
 				};
 			};
@@ -114,6 +193,7 @@
 			projectRoot = "";
 			targets = (
 				E9C185E41FE9BF1E00857300 /* FormView */,
+				E9C186071FEDD09600857300 /* FormViewTests */,
 			);
 		};
 /* End PBXProject section */
@@ -123,9 +203,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9C185F31FE9BF1E00857300 /* LaunchScreen.storyboard in Resources */,
 				E9C185F01FE9BF1E00857300 /* Assets.xcassets in Resources */,
-				E9C185EE1FE9BF1E00857300 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9C186061FEDD09600857300 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,31 +221,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9C186031FE9D8F500857300 /* UIActiveInput.swift in Sources */,
+				E9C185FD1FE9C4C800857300 /* UIQuickFormView.swift in Sources */,
 				E9C185EB1FE9BF1E00857300 /* ViewController.swift in Sources */,
+				E9C185FF1FE9CA4C00857300 /* UIInputField.swift in Sources */,
 				E9C185E91FE9BF1E00857300 /* AppDelegate.swift in Sources */,
+				E9C186011FE9CC8C00857300 /* StringTwoWayConvertible.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9C186041FEDD09600857300 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9C1860B1FEDD09600857300 /* FormViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		E9C185EC1FE9BF1E00857300 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E9C185ED1FE9BF1E00857300 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
+/* Begin PBXTargetDependency section */
+		E9C1860E1FEDD09600857300 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E9C185E41FE9BF1E00857300 /* FormView */;
+			targetProxy = E9C1860D1FEDD09600857300 /* PBXContainerItemProxy */;
 		};
-		E9C185F11FE9BF1E00857300 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E9C185F21FE9BF1E00857300 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		E9C185F51FE9BF1E00857300 /* Debug */ = {
@@ -300,6 +386,38 @@
 			};
 			name = Release;
 		};
+		E9C186101FEDD09600857300 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RRWZ6M66CZ;
+				INFOPLIST_FILE = FormViewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yelp.FormViewTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FormView.app/FormView";
+			};
+			name = Debug;
+		};
+		E9C186111FEDD09600857300 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RRWZ6M66CZ;
+				INFOPLIST_FILE = FormViewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yelp.FormViewTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FormView.app/FormView";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -317,6 +435,15 @@
 			buildConfigurations = (
 				E9C185F81FE9BF1E00857300 /* Debug */,
 				E9C185F91FE9BF1E00857300 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E9C1860F1FEDD09600857300 /* Build configuration list for PBXNativeTarget "FormViewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9C186101FEDD09600857300 /* Debug */,
+				E9C186111FEDD09600857300 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
