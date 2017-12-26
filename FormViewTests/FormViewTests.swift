@@ -32,7 +32,7 @@ class FormViewTests: XCTestCase {
             var age = 1
         }
         
-        let form = UIQuickFormView<Person, UIQuickFormBinding<UIActiveInput<String>,Person>>()
+        let form = UIQuickFormView<Person>()
         
         let firstnameField = UIActiveInput<String>()
         let lastnameField = UIActiveInput<String>()
@@ -60,7 +60,7 @@ class FormViewTests: XCTestCase {
             }
             p.age = age
         }
-        //form.addRow([ageBinding])
+        form.addRow([ageBinding])
         
         // Pretend typing stuff into the fields
         firstnameField.output = "John"

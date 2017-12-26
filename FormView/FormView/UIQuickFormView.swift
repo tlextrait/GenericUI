@@ -7,19 +7,34 @@
 
 import UIKit
 
-public protocol ResolvableBinding: class {
+fileprivate protocol ResolvableBinding: class {
     associatedtype ModelType
     func resolve(_ model: ModelType)
+    var isInput: Bool { get }
+}
+
+fileprivate class GenericFormBinding<OutputModelType> : ResolvableBinding {
+    public typealias ModelType = OutputModelType
+    
+    public var isInput: Bool {
+        fatalError("Abstract getter")
+    }
+    
+    public func resolve(_ model: GenericFormBinding<ModelType>.ModelType) {
+        // abstract
+        fatalError("Abstract method")
+    }
 }
 
 /**
  Binds a form input to a keypath on a model
  */
-open class UIQuickFormBinding<InputType : UIView, ModelType> : ResolvableBinding {
+fileprivate class UIQuickFormBinding<InputType : UIView, ModelType> : GenericFormBinding<ModelType> {
     var viewElement: UIView?
     var input: InputType?
     var binding: ((ModelType, InputType)->Void)?
-    var size: UInt = 1
+    var size: UInt = 1  // amount of space the view should take horizontally, as a proportion of whatever the total is for the row it is in
+    let identifier = UUID()
     
     var isSpacer: Bool {
         return viewElement == nil && input == nil
@@ -29,7 +44,7 @@ open class UIQuickFormBinding<InputType : UIView, ModelType> : ResolvableBinding
         return (input ?? viewElement) ?? UIView()
     }
     
-    var isInput: Bool {
+    public override var isInput: Bool {
         return input != nil
     }
     
@@ -50,7 +65,7 @@ open class UIQuickFormBinding<InputType : UIView, ModelType> : ResolvableBinding
         return UIQuickFormBinding(view: nil, size: size)
     }
     
-    public func resolve(_ model: ModelType) {
+    public override func resolve(_ model: ModelType) {
         guard let b = binding,
             let i = input else {
             return
@@ -63,9 +78,17 @@ open class UIQuickFormBinding<InputType : UIView, ModelType> : ResolvableBinding
 // MARK: - Quick Form
 //
 
-open class UIQuickFormView<OutputModel, BindingType : ResolvableBinding> : UIView {
+open class UIQuickFormView<OutputModel> : UIView {
 
-    private var inputs = [[BindingType]]()
+    /*
+    bindings organized by row, the way they should come out visually (the UUID is used to look up the bindings in the index)
+    */
+    private var viewsAndInputs = [[UUID]]()
+    
+    /*
+    maps a UUID to a UIQuickFormBinding, has to be Any because there are mixed types
+    */
+    private var bindingIndex = [UUID : GenericFormBinding<OutputModel>]()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -82,34 +105,51 @@ open class UIQuickFormView<OutputModel, BindingType : ResolvableBinding> : UIVie
     /**
      Binds an input to a setter, allowing the form to build the output model
     */
-    func bind<Field : UIView>(input: Field, binding: @escaping (OutputModel, Field)->Void) -> UIQuickFormBinding<Field, OutputModel> {
+    func bind<Field : UIView>(input: Field, binding: @escaping (OutputModel, Field)->Void) -> UUID {
         let formBind = UIQuickFormBinding(input: input, size: 1, binding: binding)
-        return formBind
+        bindingIndex[formBind.identifier] = formBind
+        return formBind.identifier
     }
     
     /**
      Binds a view
     */
-    func bind(view: UIView) -> UIQuickFormBinding<UIView, OutputModel> {
+    func bind(view: UIView) -> UUID {
         let binding = UIQuickFormBinding<UIView, OutputModel>(view: view, size: 1)
-        return binding
+        bindingIndex[binding.identifier] = binding
+        return binding.identifier
     }
     
     /**
-     Adds a row of views to the form
+     Adds a row of views to the form, by their identifiers
     */
-    func addRow(_ elements: [BindingType]) {
-        inputs.append(elements)
+    func addRow(_ elements: [UUID]) {
+        for uuid in elements {
+            assert(bindingIndex[uuid] != nil, "Tried to add an element that has no binding")
+        }
+        
+        // In production: ditch any elements that don't have a binding
+        viewsAndInputs.append(elements.filter({ (uuid: UUID) -> Bool in
+            return bindingIndex[uuid] != nil
+        }))
     }
     
     /**
      Resolves the output for this form by asking all its inputs to resolve their values
     */
     func resolve(model: OutputModel) -> OutputModel {
-        for row in inputs {
-            for input in row {
-                input.resolve(model as! BindingType.ModelType)
+        for row in viewsAndInputs {
+            
+            let rowInputs = row.map({ (identifier: UUID) -> GenericFormBinding<OutputModel> in
+                return bindingIndex[identifier]!
+            }).filter({ (i: GenericFormBinding<OutputModel>) -> Bool in
+                return i.isInput
+            })
+            
+            for input in rowInputs {
+                input.resolve(model)
             }
+            
         }
         return model
     }
