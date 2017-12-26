@@ -13,14 +13,22 @@ fileprivate protocol ResolvableBinding: class {
     var isInput: Bool { get }
 }
 
-fileprivate class GenericFormBinding<OutputModelType> : ResolvableBinding {
+/**
+ AbstractGenericFormBinding is used as an abstract that only carries the OutputModel generic.
+ This allows UIQuickFormView to reference multiple bindings for mixed types of inputs but the same output model
+ */
+fileprivate class AbstractGenericFormBinding<OutputModelType> : ResolvableBinding {
     public typealias ModelType = OutputModelType
+    
+    init() {
+        fatalError("Cannot initialize abstract class")
+    }
     
     public var isInput: Bool {
         fatalError("Abstract getter")
     }
     
-    public func resolve(_ model: GenericFormBinding<ModelType>.ModelType) {
+    public func resolve(_ model: AbstractGenericFormBinding<ModelType>.ModelType) {
         // abstract
         fatalError("Abstract method")
     }
@@ -29,11 +37,10 @@ fileprivate class GenericFormBinding<OutputModelType> : ResolvableBinding {
 /**
  Binds a form input to a keypath on a model
  */
-fileprivate class UIQuickFormBinding<InputType : UIView, ModelType> : GenericFormBinding<ModelType> {
+fileprivate class UIQuickFormBinding<InputType : UIView, ModelType> : AbstractGenericFormBinding<ModelType> {
     var viewElement: UIView?
     var input: InputType?
     var binding: ((ModelType, InputType)->Void)?
-    var size: UInt = 1  // amount of space the view should take horizontally, as a proportion of whatever the total is for the row it is in
     let identifier = UUID()
     
     var isSpacer: Bool {
@@ -48,21 +55,19 @@ fileprivate class UIQuickFormBinding<InputType : UIView, ModelType> : GenericFor
         return input != nil
     }
     
-    convenience init(view: UIView?, size: UInt) {
+    convenience init(view: UIView?) {
         self.init()
         self.viewElement = view
-        self.size = size
     }
     
-    convenience init(input: InputType, size: UInt, binding: @escaping (ModelType, InputType)->Void) {
+    convenience init(input: InputType, binding: @escaping (ModelType, InputType)->Void) {
         self.init()
         self.input = input
         self.binding = binding
-        self.size = size
     }
     
-    static func makeSpacer(size: UInt) -> UIQuickFormBinding {
-        return UIQuickFormBinding(view: nil, size: size)
+    static func makeSpacer() -> UIQuickFormBinding {
+        return UIQuickFormBinding(view: nil)
     }
     
     public override func resolve(_ model: ModelType) {
@@ -88,7 +93,7 @@ open class UIQuickFormView<OutputModel> : UIView {
     /*
     maps a UUID to a UIQuickFormBinding, has to be Any because there are mixed types
     */
-    private var bindingIndex = [UUID : GenericFormBinding<OutputModel>]()
+    private var bindingIndex = [UUID : AbstractGenericFormBinding<OutputModel>]()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -106,7 +111,7 @@ open class UIQuickFormView<OutputModel> : UIView {
      Binds an input to a setter, allowing the form to build the output model
     */
     func bind<Field : UIView>(input: Field, binding: @escaping (OutputModel, Field)->Void) -> UUID {
-        let formBind = UIQuickFormBinding(input: input, size: 1, binding: binding)
+        let formBind = UIQuickFormBinding(input: input, binding: binding)
         bindingIndex[formBind.identifier] = formBind
         return formBind.identifier
     }
@@ -115,7 +120,7 @@ open class UIQuickFormView<OutputModel> : UIView {
      Binds a view
     */
     func bind(view: UIView) -> UUID {
-        let binding = UIQuickFormBinding<UIView, OutputModel>(view: view, size: 1)
+        let binding = UIQuickFormBinding<UIView, OutputModel>(view: view)
         bindingIndex[binding.identifier] = binding
         return binding.identifier
     }
@@ -140,9 +145,9 @@ open class UIQuickFormView<OutputModel> : UIView {
     func resolve(model: OutputModel) -> OutputModel {
         for row in viewsAndInputs {
             
-            let rowInputs = row.map({ (identifier: UUID) -> GenericFormBinding<OutputModel> in
+            let rowInputs = row.map({ (identifier: UUID) -> AbstractGenericFormBinding<OutputModel> in
                 return bindingIndex[identifier]!
-            }).filter({ (i: GenericFormBinding<OutputModel>) -> Bool in
+            }).filter({ (i: AbstractGenericFormBinding<OutputModel>) -> Bool in
                 return i.isInput
             })
             
