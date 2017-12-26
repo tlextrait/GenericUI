@@ -44,15 +44,13 @@ class FormViewTests: XCTestCase {
             }
             p.firstname = firstname
         }
-        form.addRow([firstnameBinding])
-        
         let lastnameBinding = form.bind(input: lastnameField) { (p: Person, input: UIActiveInput<String>) in
             guard let lastname = input.output else {
                 return
             }
             p.lastname = lastname
         }
-        form.addRow([lastnameBinding])
+        form.addRow([FormElement(firstnameBinding, size: 1), FormElement(lastnameBinding, size: 1)])
         
         let ageBinding = form.bind(input: ageField) { (p: Person, input: UIActiveInput<Int>) in
             guard let age = input.output else {
@@ -60,7 +58,7 @@ class FormViewTests: XCTestCase {
             }
             p.age = age
         }
-        form.addRow([ageBinding])
+        form.addRow([FormElement(ageBinding, size: 1)])
         
         // Pretend typing stuff into the fields
         firstnameField.output = "John"

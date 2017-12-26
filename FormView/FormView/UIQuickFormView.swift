@@ -7,6 +7,115 @@
 
 import UIKit
 
+//
+// MARK: - Quick Form
+//
+
+open class UIQuickFormView<OutputModel> : UIView {
+    
+    /*
+     bindings organized by row, the way they should come out visually (the UUID is used to look up the bindings in the index)
+     */
+    private var viewsAndInputs = [[FormElement]]()
+    
+    /*
+     maps a UUID to a UIQuickFormBinding, has to be Any because there are mixed types
+     */
+    private var bindingIndex = [UUID : AbstractGenericFormBinding<OutputModel>]()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    convenience init() {
+        self.init(frame: .zero)
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    /**
+     Binds an input to a setter, allowing the form to build the output model
+     */
+    func bind<Field : UIView>(input: Field, binding: @escaping (OutputModel, Field)->Void) -> UUID {
+        let formBind = UIQuickFormBinding(input: input, binding: binding)
+        bindingIndex[formBind.identifier] = formBind
+        return formBind.identifier
+    }
+    
+    /**
+     Binds a view
+     */
+    func bind(view: UIView) -> UUID {
+        let binding = UIQuickFormBinding<UIView, OutputModel>(view: view)
+        bindingIndex[binding.identifier] = binding
+        return binding.identifier
+    }
+    
+    /**
+     Adds a row of views to the form, by their identifiers
+     */
+    func addRow(_ elements: [FormElement]) {
+        for el in elements {
+            assert(hasBinding(for: el), "Tried to add an element that has no binding")
+        }
+        
+        // In production: ditch any elements that don't have a binding
+        viewsAndInputs.append(elements.filter({ (el: FormElement) -> Bool in
+            return hasBinding(for: el)
+        }))
+    }
+    
+    /**
+     Resolves the output for this form by asking all its inputs to resolve their values
+     */
+    func resolve(model: OutputModel) -> OutputModel {
+        for row in viewsAndInputs {
+            
+            let rowInputs = row.map({ (el: FormElement) -> AbstractGenericFormBinding<OutputModel> in
+                return binding(for: el)!
+            }).filter({ (i: AbstractGenericFormBinding<OutputModel>) -> Bool in
+                return i.isInput
+            })
+            
+            for input in rowInputs {
+                input.resolve(model)
+            }
+            
+        }
+        return model
+    }
+    
+    private func hasBinding(for element: FormElement) -> Bool {
+        return bindingIndex[element.identifier] != nil
+    }
+    
+    private func binding(for element: FormElement) -> AbstractGenericFormBinding<OutputModel>? {
+        return bindingIndex[element.identifier]
+    }
+    
+}
+
+//
+// MARK: UI & Public API
+//
+
+public struct FormElement {
+    var identifier: UUID
+    var size: UInt
+    
+    init(_ identifier: UUID, size: UInt) {
+        assert(size > 0, "Size should be greater than 0")
+        self.identifier = identifier
+        self.size = size
+    }
+}
+
+//
+// MARK: Private API
+//
+
 fileprivate protocol ResolvableBinding: class {
     associatedtype ModelType
     func resolve(_ model: ModelType)
@@ -21,7 +130,7 @@ fileprivate class AbstractGenericFormBinding<OutputModelType> : ResolvableBindin
     public typealias ModelType = OutputModelType
     
     init() {
-        fatalError("Cannot initialize abstract class")
+        // do nothing
     }
     
     public var isInput: Bool {
@@ -56,12 +165,12 @@ fileprivate class UIQuickFormBinding<InputType : UIView, ModelType> : AbstractGe
     }
     
     convenience init(view: UIView?) {
-        self.init()
+        self.init() // may call the abstract initializer if 'self' is believed to be a AbstractGenericFormBinding
         self.viewElement = view
     }
     
     convenience init(input: InputType, binding: @escaping (ModelType, InputType)->Void) {
-        self.init()
+        self.init() // may call the abstract initializer if 'self' is believed to be a AbstractGenericFormBinding
         self.input = input
         self.binding = binding
     }
@@ -77,86 +186,4 @@ fileprivate class UIQuickFormBinding<InputType : UIView, ModelType> : AbstractGe
         }
         b(model, i)
     }
-}
-
-//
-// MARK: - Quick Form
-//
-
-open class UIQuickFormView<OutputModel> : UIView {
-
-    /*
-    bindings organized by row, the way they should come out visually (the UUID is used to look up the bindings in the index)
-    */
-    private var viewsAndInputs = [[UUID]]()
-    
-    /*
-    maps a UUID to a UIQuickFormBinding, has to be Any because there are mixed types
-    */
-    private var bindingIndex = [UUID : AbstractGenericFormBinding<OutputModel>]()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    convenience init() {
-        self.init(frame: .zero)
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    /**
-     Binds an input to a setter, allowing the form to build the output model
-    */
-    func bind<Field : UIView>(input: Field, binding: @escaping (OutputModel, Field)->Void) -> UUID {
-        let formBind = UIQuickFormBinding(input: input, binding: binding)
-        bindingIndex[formBind.identifier] = formBind
-        return formBind.identifier
-    }
-    
-    /**
-     Binds a view
-    */
-    func bind(view: UIView) -> UUID {
-        let binding = UIQuickFormBinding<UIView, OutputModel>(view: view)
-        bindingIndex[binding.identifier] = binding
-        return binding.identifier
-    }
-    
-    /**
-     Adds a row of views to the form, by their identifiers
-    */
-    func addRow(_ elements: [UUID]) {
-        for uuid in elements {
-            assert(bindingIndex[uuid] != nil, "Tried to add an element that has no binding")
-        }
-        
-        // In production: ditch any elements that don't have a binding
-        viewsAndInputs.append(elements.filter({ (uuid: UUID) -> Bool in
-            return bindingIndex[uuid] != nil
-        }))
-    }
-    
-    /**
-     Resolves the output for this form by asking all its inputs to resolve their values
-    */
-    func resolve(model: OutputModel) -> OutputModel {
-        for row in viewsAndInputs {
-            
-            let rowInputs = row.map({ (identifier: UUID) -> AbstractGenericFormBinding<OutputModel> in
-                return bindingIndex[identifier]!
-            }).filter({ (i: AbstractGenericFormBinding<OutputModel>) -> Bool in
-                return i.isInput
-            })
-            
-            for input in rowInputs {
-                input.resolve(model)
-            }
-            
-        }
-        return model
-    }
-
 }
