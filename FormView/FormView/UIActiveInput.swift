@@ -18,6 +18,12 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
         
         // Auto-setup keyboard
         keyboardType = OutputType.bestKeyboardType
+        
+        // Default layout margins
+        layoutMargins.top = 5.0
+        layoutMargins.bottom = 5.0
+        layoutMargins.left = 8.0
+        layoutMargins.right = 8.0
     }
     
     convenience init() {
@@ -74,7 +80,6 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
      Text Field delegate
     */
     var delegate: UITextFieldDelegate?
-
     
     /**
      This forces a width on the label for the input. This is used for when we have multiple inputs with different label lengths and we want all inputs to be perfectly aligned.

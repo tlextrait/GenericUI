@@ -8,6 +8,10 @@
 
 import UIKit
 
+/**
+ Simple generic subclass for UITextField
+ Note: we just assume the string input is convertible to the generic type
+ */
 open class UIInputField<OutputType : StringTwoWayConvertible>: UITextField {
 
     override init(frame: CGRect) {
