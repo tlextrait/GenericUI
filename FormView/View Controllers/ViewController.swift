@@ -58,14 +58,9 @@ class ViewController: UIViewController {
         // Form
         //
         
-        /*
- 
-        
- 
-        */
 
-        let field = UIActiveInput<Int>()
-        field.label.text = "FIRST NAME"
+
+        let field = UIActiveInput<Int>(label: "FIRST NAME")
         field.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(field)
 
@@ -75,8 +70,7 @@ class ViewController: UIViewController {
 
         
         
-        let field2 = UIActiveInput<String>()
-        field2.label.text = "LAST NAME"
+        let field2 = UIActiveInput<String>(label: "LAST NAME")
         field2.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(field2)
         
@@ -86,8 +80,7 @@ class ViewController: UIViewController {
         
         
         
-        let field3 = UIActiveInput<String>()
-        field3.label.text = "HOME ADDRESS"
+        let field3 = UIActiveInput<String>(label: "HOME ADDRESS")
         field3.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(field3)
         

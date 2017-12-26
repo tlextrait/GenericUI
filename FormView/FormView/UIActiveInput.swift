@@ -8,9 +8,34 @@
 
 import UIKit
 
+/**
+ UIActiveInput is a cool customizable text-based input. Best used in a form with multiple inputs as it displays
+ in a user-friendly manner which input is "active"
+ */
 open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType> : UIView, UITextFieldDelegate {
     
-    override init(frame: CGRect) {
+    /**
+     User this initializer if you have a custom frame you want to use for the input
+     @param frame
+    */
+    convenience override init(frame: CGRect) {
+        self.init(frame: frame, label: "INPUT")
+    }
+    
+    /**
+     Use this initializer if you're planning on using autolayout
+     @param label (optional)
+    */
+    convenience init(label: String = "INPUT") {
+        self.init(frame: .zero, label: label)
+    }
+    
+    /**
+     User this initializer if you have a custom frame you want to use for the input
+     @param frame
+     @param label
+     */
+    init(frame: CGRect, label: String) {
         super.init(frame: frame)
         
         setupViews()
@@ -18,10 +43,9 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
         
         // Auto-setup keyboard
         keyboardType = OutputType.bestKeyboardType
-    }
-    
-    convenience init() {
-        self.init(frame: .zero)
+        
+        // Label
+        self.label.text = label
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -341,7 +365,6 @@ fileprivate extension UIActiveInput {
 fileprivate extension UIActiveInput {
     
     func setupViews() {
-        
         layoutMargins = UIActiveInput.defaultLayoutMargins
         backgroundColor = UIActiveInput.defaultBackgroundColor
         layer.cornerRadius = UIActiveInput.defaultCornerRadius

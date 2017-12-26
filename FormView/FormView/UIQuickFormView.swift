@@ -11,6 +11,12 @@ import UIKit
 // MARK: - Quick Form
 //
 
+/**
+ UIQuickFormView allows to easily setup a complex form for gathering OutputModel from the user
+ Simply initialize the form, use bind() to bind your inputs and views to the form, addRow() to
+ tell the form where to put the inputs/views and how to lay them, and just call resolve()
+ when you want to produce the OutputModel from the values in the inputs
+ */
 open class UIQuickFormView<OutputModel> : UIView {
     
     /*
@@ -92,14 +98,18 @@ open class UIQuickFormView<OutputModel> : UIView {
         return model
     }
     
-    private func hasBinding(for element: FormElement) -> Bool {
+}
+
+fileprivate extension UIQuickFormView {
+    
+    func hasBinding(for element: FormElement) -> Bool {
         guard let id = element.identifier else {
             return false
         }
         return bindingIndex[id] != nil
     }
     
-    private func binding(for element: FormElement) -> AbstractGenericFormBinding<OutputModel>? {
+    func binding(for element: FormElement) -> AbstractGenericFormBinding<OutputModel>? {
         guard let id = element.identifier else {
             return nil
         }
