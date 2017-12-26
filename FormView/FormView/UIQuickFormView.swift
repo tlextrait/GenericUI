@@ -74,10 +74,13 @@ open class UIQuickFormView<OutputModel> : UIView {
         for row in viewsAndInputs {
             
             let rowInputs = row.filter({ (el: FormElement) -> Bool in
+                // Filter out spacers
                 return !el.isSpacer
             }).map({ (el: FormElement) -> AbstractGenericFormBinding<OutputModel> in
+                // Map form elements to bindings
                 return binding(for: el)!
             }).filter({ (i: AbstractGenericFormBinding<OutputModel>) -> Bool in
+                // Filter out non-inputs
                 return i.isInput
             })
             
