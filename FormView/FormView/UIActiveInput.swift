@@ -295,6 +295,7 @@ fileprivate extension UIActiveInput {
     static var defaultIndicatorCornerRadius: CGFloat { return 1.0 }
     static var defaultIndicatorWidth: CGFloat { return 3.0 }
     static var defaultIndicatorColor: UIColor { return UIButton().tintColor }
+    static var defaultLayoutMargins: UIEdgeInsets { return UIEdgeInsets(top: 5.0, left: 8.0, bottom: 5.0, right: 8.0) }
 }
 
 //
@@ -341,12 +342,7 @@ fileprivate extension UIActiveInput {
     
     func setupViews() {
         
-        // Default layout margins
-        layoutMargins.top = 5.0
-        layoutMargins.bottom = 5.0
-        layoutMargins.left = 8.0
-        layoutMargins.right = 8.0
-        
+        layoutMargins = UIActiveInput.defaultLayoutMargins
         backgroundColor = UIActiveInput.defaultBackgroundColor
         layer.cornerRadius = UIActiveInput.defaultCornerRadius
         
