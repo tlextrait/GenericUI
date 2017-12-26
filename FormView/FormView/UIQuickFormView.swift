@@ -58,12 +58,12 @@ open class UIQuickFormView<OutputModel> : UIView {
      */
     func addRow(_ elements: [FormElement]) {
         for el in elements {
-            assert(hasBinding(for: el), "Tried to add an element that has no binding")
+            assert(el.isSpacer || hasBinding(for: el), "Tried to add an input that has no binding")
         }
         
-        // In production: ditch any elements that don't have a binding
+        // In production: ditch any inputs that don't have a binding
         viewsAndInputs.append(elements.filter({ (el: FormElement) -> Bool in
-            return hasBinding(for: el)
+            return el.isSpacer || hasBinding(for: el)
         }))
     }
     
@@ -73,7 +73,9 @@ open class UIQuickFormView<OutputModel> : UIView {
     func resolve(model: OutputModel) -> OutputModel {
         for row in viewsAndInputs {
             
-            let rowInputs = row.map({ (el: FormElement) -> AbstractGenericFormBinding<OutputModel> in
+            let rowInputs = row.filter({ (el: FormElement) -> Bool in
+                return !el.isSpacer
+            }).map({ (el: FormElement) -> AbstractGenericFormBinding<OutputModel> in
                 return binding(for: el)!
             }).filter({ (i: AbstractGenericFormBinding<OutputModel>) -> Bool in
                 return i.isInput

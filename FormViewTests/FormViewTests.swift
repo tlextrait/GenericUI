@@ -24,8 +24,39 @@ class FormViewTests: XCTestCase {
     /**
      Tests building a form, filling it and recovering the data
     */
-    func testForm() {
+    func testSimpleFormShouldResolveAnOutput() {
+        class Person {
+            var firstname = ""
+        }
         
+        let form = UIQuickFormView<Person>()
+        
+        let firstnameField = UIActiveInput<String>()
+        
+        let firstnameBinding = form.bind(input: firstnameField) { (p: Person, input: UIActiveInput<String>) in
+            guard let firstname = input.output else {
+                return
+            }
+            p.firstname = firstname
+        }
+        form.addRow([FormElement(firstnameBinding, size: 1)])
+        
+        // Pretend typing stuff into the fields
+        firstnameField.output = "John"
+        
+        // Test string outputs
+        XCTAssertEqual(firstnameField.text, "John")
+        
+        // Test generic outputs
+        XCTAssertEqual(firstnameField.output, "John")
+        
+        // Ask the form to build the model
+        let person = form.resolve(model: Person())
+        
+        XCTAssertEqual(person.firstname, "John")
+    }
+    
+    func testComplexFormShouldResolveAnOutput() {
         class Person {
             var firstname = ""
             var lastname = ""
@@ -50,7 +81,7 @@ class FormViewTests: XCTestCase {
             }
             p.lastname = lastname
         }
-        form.addRow([FormElement(firstnameBinding, size: 1), FormElement(lastnameBinding, size: 1)])
+        form.addRow([FormElement(firstnameBinding, size: 1), FormElement.spacer(size: 10), FormElement(lastnameBinding, size: 1)])
         
         let ageBinding = form.bind(input: ageField) { (p: Person, input: UIActiveInput<Int>) in
             guard let age = input.output else {
