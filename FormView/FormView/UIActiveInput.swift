@@ -18,12 +18,6 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
         
         // Auto-setup keyboard
         keyboardType = OutputType.bestKeyboardType
-        
-        // Default layout margins
-        layoutMargins.top = 5.0
-        layoutMargins.bottom = 5.0
-        layoutMargins.left = 8.0
-        layoutMargins.right = 8.0
     }
     
     convenience init() {
@@ -61,7 +55,7 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
     /**
      Color for the indicator
     */
-    var activeColor: UIColor = UIActiveInput.defaultIndicateColor {
+    var activeColor: UIColor = UIActiveInput.defaultIndicatorColor {
         didSet {
             activeIndicatorView.backgroundColor = activeColor
         }
@@ -300,7 +294,7 @@ fileprivate extension UIActiveInput {
     static var defaultInputBackgroundColor: UIColor { return .white }
     static var defaultIndicatorCornerRadius: CGFloat { return 1.0 }
     static var defaultIndicatorWidth: CGFloat { return 3.0 }
-    static var defaultIndicateColor: UIColor { return UIButton().tintColor }
+    static var defaultIndicatorColor: UIColor { return UIButton().tintColor }
 }
 
 //
@@ -346,6 +340,13 @@ fileprivate extension UIActiveInput {
 fileprivate extension UIActiveInput {
     
     func setupViews() {
+        
+        // Default layout margins
+        layoutMargins.top = 5.0
+        layoutMargins.bottom = 5.0
+        layoutMargins.left = 8.0
+        layoutMargins.right = 8.0
+        
         backgroundColor = UIActiveInput.defaultBackgroundColor
         layer.cornerRadius = UIActiveInput.defaultCornerRadius
         
