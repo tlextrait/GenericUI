@@ -32,6 +32,7 @@ open class UIQuickFormView<OutputModel> : UIView {
     // UI Settings
     var viewVerticalSpacing: CGFloat = 5.0
     var viewHorizontalSpacing: CGFloat = 5.0
+    var defaultSpacerHeight: CGFloat = 10.0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -203,8 +204,15 @@ extension UIQuickFormView {
                     view.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor).isActive = true
                 }
                 
-                let sizeMultiplier = row.count > 1 ? CGFloat(viewSize.size) / CGFloat(rowTotalSize) : 1.0
+                // Width
+                let sizeMultiplier: CGFloat = row.count > 1 ? CGFloat(viewSize.size) / CGFloat(rowTotalSize) : 1.0
                 view.widthAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.widthAnchor, multiplier: sizeMultiplier).isActive = true
+                
+                // Height
+                if row.count == 1 && viewSize.isSpacer {
+                    // if the only view in the row is a spacer, then it needs a height because the UIView has no intrinsinct height
+                    view.heightAnchor.constraint(equalToConstant: defaultSpacerHeight)
+                }
                 
                 if firstViewInPreviousRow == nil {
                     firstViewInPreviousRow = view
@@ -233,7 +241,7 @@ extension UIQuickFormView {
                         assert(false, "Couldn't find the binding")
                     }
                 }
-                return ViewSize(size: f.size, view: view)
+                return ViewSize(size: f.size, view: view, isSpacer: f.isSpacer)
             })
         }
     }
@@ -241,9 +249,11 @@ extension UIQuickFormView {
     struct ViewSize {
         var size: UInt
         var view: UIView
-        init(size: UInt, view: UIView) {
+        var isSpacer: Bool
+        init(size: UInt, view: UIView, isSpacer: Bool = false) {
             self.size = size
             self.view = view
+            self.isSpacer = isSpacer
         }
     }
     
