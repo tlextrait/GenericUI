@@ -160,6 +160,10 @@ extension UIQuickFormView {
             
             let isFirstRow = (firstViewInPreviousRow == nil)
             let isLastRow = (rCounter == mappedViews.count - 1)
+            var rowTotalSize: UInt = 0
+            for e in row {
+                rowTotalSize += e.size
+            }
             var previousViewInSameRow: UIView?
             var vCounter = 0
             
@@ -198,6 +202,9 @@ extension UIQuickFormView {
                 if isLastRow {
                     view.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor).isActive = true
                 }
+                
+                let sizeMultiplier = row.count > 1 ? CGFloat(viewSize.size) / CGFloat(rowTotalSize) : 1.0
+                view.widthAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.widthAnchor, multiplier: sizeMultiplier).isActive = true
                 
                 if firstViewInPreviousRow == nil {
                     firstViewInPreviousRow = view

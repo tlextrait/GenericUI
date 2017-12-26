@@ -113,13 +113,13 @@ class ViewController: UIViewController {
         userForm.addRow([FormElement(idTitle)])
         userForm.addRow([FormElement(idFirstname), FormElement(idLastname)])
         userForm.addRow([FormElement(idAddress)])
-        userForm.addRow([FormElement(idAge), FormElement.spacer(size: 2)])
+        //userForm.addRow([FormElement(idAge), FormElement.spacer(size: 2)])
         
         // Form constraints
         userForm.translatesAutoresizingMaskIntoConstraints = false
         userForm.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 10.0).isActive = true
         userForm.leadingAnchor.constraint(equalTo: margins.leadingAnchor, constant: 8.0).isActive = true
-        userForm.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: 8.0).isActive = true
+        userForm.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: -8.0).isActive = true
         userForm.setRecommendedContentPriorities()
         userForm.build()
         
@@ -135,30 +135,11 @@ class ViewController: UIViewController {
         button.topAnchor.constraint(equalTo: userForm.bottomAnchor, constant: 10.0).isActive = true
         button.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
         button.addTarget(self, action: #selector(self.doneTapped), for: UIControlEvents.allTouchEvents)
-        
-        /*
-        view.addSubview(field)
-
-        field.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 10.0).isActive = true
-        field.leadingAnchor.constraint(equalTo: margins.leadingAnchor, constant: 10.0).isActive = true
-        field.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: -10.0).isActive = true
-
-        view.addSubview(field2)
-        
-        field2.topAnchor.constraint(equalTo: field.bottomAnchor, constant: 2.0).isActive = true
-        field2.leadingAnchor.constraint(equalTo: margins.leadingAnchor, constant: 10.0).isActive = true
-        field2.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: -10.0).isActive = true
-
-        view.addSubview(field3)
-        
-        field3.topAnchor.constraint(equalTo: field2.bottomAnchor, constant: 2.0).isActive = true
-        field3.leadingAnchor.constraint(equalTo: margins.leadingAnchor, constant: 10.0).isActive = true
-        field3.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: -10.0).isActive = true
-         */
     }
     
     @objc func doneTapped() {
-        print(userForm.resolve(model: Person()))
+        let person = userForm.resolve(model: Person())
+        print(person)
     }
 
 
