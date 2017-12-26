@@ -26,28 +26,41 @@ class FormViewTests: XCTestCase {
     */
     func testForm() {
         
-        class Person : NSObject, VoidInitializable {
-            /*@objc */var firstname = ""
-            /*@objc */var lastname = ""
-            /*@objc */var age = 1
-            
-            required override init() {
-            }
+        class Person {
+            var firstname = ""
+            var lastname = ""
+            var age = 1
         }
         
-        let form = UIQuickFormView<Person>()
+        let form = UIQuickFormView<Person, UIQuickFormBinding<UIActiveInput<String>,Person>>()
         
         let firstnameField = UIActiveInput<String>()
         let lastnameField = UIActiveInput<String>()
         let ageField = UIActiveInput<Int>()
         
-        let binding = form.bind(input: firstnameField) { (p: Person, input: UIActiveInput<String>) in
+        let firstnameBinding = form.bind(input: firstnameField) { (p: Person, input: UIActiveInput<String>) in
             guard let firstname = input.output else {
                 return
             }
             p.firstname = firstname
         }
-        form.addRow([binding])
+        form.addRow([firstnameBinding])
+        
+        let lastnameBinding = form.bind(input: lastnameField) { (p: Person, input: UIActiveInput<String>) in
+            guard let lastname = input.output else {
+                return
+            }
+            p.lastname = lastname
+        }
+        form.addRow([lastnameBinding])
+        
+        let ageBinding = form.bind(input: ageField) { (p: Person, input: UIActiveInput<Int>) in
+            guard let age = input.output else {
+                return
+            }
+            p.age = age
+        }
+        //form.addRow([ageBinding])
         
         // Pretend typing stuff into the fields
         firstnameField.output = "John"
@@ -65,7 +78,7 @@ class FormViewTests: XCTestCase {
         XCTAssertEqual(ageField.output, 26)
         
         // Ask the form to build the model
-        let person = form.resolve()
+        let person = form.resolve(model: Person())
         
         XCTAssertEqual(person.firstname, "John")
         XCTAssertEqual(person.lastname, "Smith")

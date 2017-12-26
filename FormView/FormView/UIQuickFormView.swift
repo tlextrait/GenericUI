@@ -108,7 +108,7 @@ open class UIQuickFormView<OutputModel, BindingType : ResolvableBinding> : UIVie
     func resolve(model: OutputModel) -> OutputModel {
         for row in inputs {
             for input in row {
-                input.resolve(model)
+                input.resolve(model as! BindingType.ModelType)
             }
         }
         return model
