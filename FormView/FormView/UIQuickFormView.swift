@@ -29,6 +29,10 @@ open class UIQuickFormView<OutputModel> : UIView {
      */
     private var bindingIndex = [UUID : AbstractGenericFormBinding<OutputModel>]()
     
+    // UI Settings
+    var viewVerticalSpacing: CGFloat = 5.0
+    var viewHorizontalSpacing: CGFloat = 5.0
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -98,18 +102,14 @@ open class UIQuickFormView<OutputModel> : UIView {
         return model
     }
     
-}
-
-fileprivate extension UIQuickFormView {
-    
-    func hasBinding(for element: FormElement) -> Bool {
+    private func hasBinding(for element: FormElement) -> Bool {
         guard let id = element.identifier else {
             return false
         }
         return bindingIndex[id] != nil
     }
     
-    func binding(for element: FormElement) -> AbstractGenericFormBinding<OutputModel>? {
+    private func binding(for element: FormElement) -> AbstractGenericFormBinding<OutputModel>? {
         guard let id = element.identifier else {
             return nil
         }
@@ -119,14 +119,139 @@ fileprivate extension UIQuickFormView {
 }
 
 //
-// MARK: UI & Public API
+// MARK: Form UI
+//
+
+extension UIQuickFormView {
+    
+    func setRecommendedContentPriorities() {
+        setRecommendedContentCompressionPriorities()
+        setRecommendedContentHuggingPriorities()
+    }
+    
+    func setRecommendedContentCompressionPriorities() {
+        setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+    }
+    
+    func setRecommendedContentHuggingPriorities() {
+        setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        setContentHuggingPriority(.defaultLow, for: .vertical)
+    }
+    
+    /**
+     This effectively builds the UI. Do not call this to refresh the UI as it is destructive.
+    */
+    func build() {
+        // Remove everything from the view to start over if necessary
+        if !subviews.isEmpty {
+            for view in subviews {
+                view.removeFromSuperview()
+            }
+        }
+        
+        // @TODO: Needed?
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        var firstViewInPreviousRow: UIView?
+        var rCounter = 0
+        
+        for row in mappedViews {
+            
+            let isFirstRow = (firstViewInPreviousRow == nil)
+            let isLastRow = (rCounter == mappedViews.count - 1)
+            var previousViewInSameRow: UIView?
+            var vCounter = 0
+            
+            for viewSize in row {
+                let isFirstViewInThisRow = (previousViewInSameRow == nil)
+                let isLastViewInThisRow = (vCounter == row.count - 1)
+                
+                let view = viewSize.view
+                view.translatesAutoresizingMaskIntoConstraints = false
+                addSubview(view)
+                
+                //
+                // Setup constraints
+                //
+                
+                // Top
+                if isFirstRow {
+                    view.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor).isActive = true
+                } else {
+                    view.topAnchor.constraint(equalTo: firstViewInPreviousRow!.bottomAnchor, constant: viewVerticalSpacing).isActive = true
+                }
+                
+                // Left
+                if isFirstViewInThisRow {
+                    view.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor).isActive = true
+                } else {
+                    view.leadingAnchor.constraint(equalTo: previousViewInSameRow!.trailingAnchor, constant: viewHorizontalSpacing).isActive = true
+                }
+                
+                // Right
+                if isLastViewInThisRow {
+                    view.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor).isActive = true
+                }
+                
+                // Bottom
+                if isLastRow {
+                    view.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor).isActive = true
+                }
+                
+                if firstViewInPreviousRow == nil {
+                    firstViewInPreviousRow = view
+                }
+                previousViewInSameRow = view
+                vCounter+=1
+            }
+            
+            previousViewInSameRow = nil
+            rCounter+=1
+        }
+    }
+    
+    /**
+     Maps all the bindings and form elements into appropriate views, ordered by row. Detects spacers and converts them to UIView
+    */
+    var mappedViews: [[ViewSize]] {
+        return viewsAndInputs.map { (farray: [FormElement]) -> [ViewSize] in
+            return farray.map({ (f: FormElement) -> ViewSize in
+                var view = UIView()
+                if !f.isSpacer {
+                    if let uuid = f.identifier,
+                        let binding = bindingIndex[uuid] {
+                        view = binding.view
+                    } else {
+                        assert(false, "Couldn't find the binding")
+                    }
+                }
+                return ViewSize(size: f.size, view: view)
+            })
+        }
+    }
+    
+    struct ViewSize {
+        var size: UInt
+        var view: UIView
+        init(size: UInt, view: UIView) {
+            self.size = size
+            self.view = view
+        }
+    }
+    
+}
+
+
+//
+// MARK: Public API
 //
 
 public struct FormElement {
     var identifier: UUID?
     var size: UInt
     
-    init(_ identifier: UUID, size: UInt) {
+    init(_ identifier: UUID, size: UInt = 1) {
         assert(size > 0, "Size should be greater than 0")
         self.identifier = identifier
         self.size = size
@@ -154,6 +279,7 @@ fileprivate protocol ResolvableBinding: class {
     associatedtype ModelType
     func resolve(_ model: ModelType)
     var isInput: Bool { get }
+    var view: UIView { get }
 }
 
 /**
@@ -161,17 +287,21 @@ fileprivate protocol ResolvableBinding: class {
  This allows UIQuickFormView to reference multiple bindings for mixed types of inputs but the same output model
  */
 fileprivate class AbstractGenericFormBinding<OutputModelType> : ResolvableBinding {
-    public typealias ModelType = OutputModelType
+    typealias ModelType = OutputModelType
     
     init() {
         // do nothing
     }
     
-    public var isInput: Bool {
+    var isInput: Bool {
         fatalError("Abstract getter")
     }
     
-    public func resolve(_ model: AbstractGenericFormBinding<ModelType>.ModelType) {
+    var view: UIView {
+        fatalError("Abstract getter")
+    }
+    
+    func resolve(_ model: AbstractGenericFormBinding<ModelType>.ModelType) {
         // abstract
         fatalError("Abstract method")
     }
@@ -186,11 +316,11 @@ fileprivate class UIQuickFormBinding<InputType : UIView, ModelType> : AbstractGe
     var binding: ((ModelType, InputType)->Void)?
     let identifier = UUID()
     
-    var view: UIView {
+    override var view: UIView {
         return (input ?? viewElement) ?? UIView()
     }
     
-    public override var isInput: Bool {
+    override var isInput: Bool {
         return input != nil
     }
     
@@ -205,7 +335,7 @@ fileprivate class UIQuickFormBinding<InputType : UIView, ModelType> : AbstractGe
         self.binding = binding
     }
     
-    public override func resolve(_ model: ModelType) {
+    override func resolve(_ model: ModelType) {
         guard let b = binding,
             let i = input else {
             assert(false, "Failed to find the input for a binding")
