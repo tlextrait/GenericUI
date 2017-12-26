@@ -335,18 +335,6 @@ fileprivate extension UIActiveInput {
 }
 
 //
-// MARK: - InputProtocol
-//
-/*
-extension UIActiveInput : InputProtocol {
-    
-    public var outputValue: Any? {
-        return output as Any
-    }
-    
-}
-*/
-//
 // MARK: - View Setup
 //
 
