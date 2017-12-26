@@ -35,6 +35,7 @@ class FormViewTests: XCTestCase {
         
         let firstnameBinding = form.bind(input: firstnameField) { (p: Person, input: UIActiveInput<String>) in
             guard let firstname = input.output else {
+                // Any error handling would go here :)
                 return
             }
             p.firstname = firstname
@@ -74,12 +75,14 @@ class FormViewTests: XCTestCase {
         
         let firstnameBinding = form.bind(input: firstnameField) { (p: Person, input: UIActiveInput<String>) in
             guard let firstname = input.output else {
+                // Any error handling would go here :)
                 return
             }
             p.firstname = firstname
         }
         let lastnameBinding = form.bind(input: lastnameField) { (p: Person, input: UIActiveInput<String>) in
             guard let lastname = input.output else {
+                // Any error handling would go here :)
                 return
             }
             p.lastname = lastname
@@ -135,12 +138,14 @@ class FormViewTests: XCTestCase {
         
         let firstnameBinding = form.bind(input: firstnameField) { (p: Person, input: UIActiveInput<String>) in
             guard let firstname = input.output else {
+                // Any error handling would go here :)
                 return
             }
             p.firstname = firstname
         }
         let lastnameBinding = form.bind(input: lastnameField) { (p: Person, input: UITextField) in
             guard let lastname = input.text else {
+                // Any error handling would go here :)
                 return
             }
             p.lastname = lastname
@@ -149,6 +154,7 @@ class FormViewTests: XCTestCase {
         
         let ageBinding = form.bind(input: ageField) { (p: Person, input: UIActiveInput<Int>) in
             guard let age = input.output else {
+                // Any error handling would go here :)
                 return
             }
             p.age = age
