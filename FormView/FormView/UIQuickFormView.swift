@@ -88,11 +88,17 @@ open class UIQuickFormView<OutputModel> : UIView {
     }
     
     private func hasBinding(for element: FormElement) -> Bool {
-        return bindingIndex[element.identifier] != nil
+        guard let id = element.identifier else {
+            return false
+        }
+        return bindingIndex[id] != nil
     }
     
     private func binding(for element: FormElement) -> AbstractGenericFormBinding<OutputModel>? {
-        return bindingIndex[element.identifier]
+        guard let id = element.identifier else {
+            return nil
+        }
+        return bindingIndex[id]
     }
     
 }
@@ -102,13 +108,26 @@ open class UIQuickFormView<OutputModel> : UIView {
 //
 
 public struct FormElement {
-    var identifier: UUID
+    var identifier: UUID?
     var size: UInt
     
     init(_ identifier: UUID, size: UInt) {
         assert(size > 0, "Size should be greater than 0")
         self.identifier = identifier
         self.size = size
+    }
+    
+    // Only used for making spacers
+    private init(size: UInt) {
+        self.size = size
+    }
+    
+    static func spacer(size: UInt) -> FormElement {
+        return FormElement(size: size)
+    }
+    
+    var isSpacer: Bool {
+        return identifier == nil
     }
 }
 
@@ -152,10 +171,6 @@ fileprivate class UIQuickFormBinding<InputType : UIView, ModelType> : AbstractGe
     var binding: ((ModelType, InputType)->Void)?
     let identifier = UUID()
     
-    var isSpacer: Bool {
-        return viewElement == nil && input == nil
-    }
-    
     var view: UIView {
         return (input ?? viewElement) ?? UIView()
     }
@@ -175,13 +190,10 @@ fileprivate class UIQuickFormBinding<InputType : UIView, ModelType> : AbstractGe
         self.binding = binding
     }
     
-    static func makeSpacer() -> UIQuickFormBinding {
-        return UIQuickFormBinding(view: nil)
-    }
-    
     public override func resolve(_ model: ModelType) {
         guard let b = binding,
             let i = input else {
+            assert(false, "Failed to find the input for a binding")
             return
         }
         b(model, i)
