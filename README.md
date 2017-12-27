@@ -1,3 +1,5 @@
+![Generic User Interface](https://github.com/tlextrait/GenericUI/blob/master/Screenshots/screenshot.png?raw=true)
+
 #  GenericUI
 
 GenericUI provides you with generic UI elements for your iOS projects. For now it just focuses on inputs and forms but there's a lot more to come.
