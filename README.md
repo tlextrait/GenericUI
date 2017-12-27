@@ -1,4 +1,4 @@
-<img src="Media/preview.gif" width="450"/>
+<center><img src="Media/preview.gif" width="300"/></center>
 
 #  GenericUI
 
