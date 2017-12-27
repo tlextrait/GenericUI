@@ -1,8 +1,16 @@
-<center><img src="Media/preview.gif" width="300"/></center>
+<center><img alt="Generic User Interface" src="Media/preview.gif" width="300"/></center>
 
 #  GenericUI
 
 GenericUI provides you with generic UI elements for your iOS projects. For now it just focuses on inputs and forms but there's a lot more to come.
+
+## Contents
+* [GenericUI](#genericui)
+    * [Background](#background)
+* [Components](#components)
+    * [Inputs](#inputs)
+    * [Forms](#forms)
+* [Usage](#usage)
 
 ## Background
 
