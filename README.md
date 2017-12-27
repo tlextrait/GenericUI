@@ -10,7 +10,9 @@ GenericUI provides you with generic UI elements for your iOS projects. For now i
 * [Components](#components)
     * [Inputs](#inputs)
     * [Forms](#forms)
-* [Usage](#usage)
+* [Examples](#examples)
+    * [Gathering a `String`](#gathering-a-string)
+    * [Gathering a `UInt`](#gathering-a-uint)
 
 ## Background
 
@@ -46,10 +48,9 @@ care of all the layout for you.
 ## more...
 a lot more to come...
 
-# Usage
+# Examples
 
-## Inputs
-### Gathering a `String`
+## Gathering a `String`
 
 The code below will make an input labeled "Firstname". It allows the user to enter text and the output will be a `String`.
 
@@ -59,7 +60,7 @@ addSubview(input)
 let firstname: String = input.output // returns String?
 ```
 
-### Gathering a `UInt`
+## Gathering a `UInt`
 
 Below is an example of an input that gathers an unsigned integer from the user. The ouput is a `UInt`. The `UIActiveInput` is
 smart and automatically sets the keyboard to a numeric pad with no decimal point.
@@ -70,7 +71,7 @@ addSubview(input)
 let age: UInt = input.output // returns UInt?
 ```
 
-### Gathering a custom object `T`
+## Gathering a custom object `T`
 
 You may gather your own type of model from a `UIActiveInput`, however it will need to conform with a couple protocols,
 namely: `StringTwoWayConvertible` and `BestKeyboardType`. The purpose of these protocols is to ensure your object provides
