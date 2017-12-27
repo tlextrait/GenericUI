@@ -1,4 +1,4 @@
-![Generic User Interface](https://github.com/tlextrait/GenericUI/blob/master/Screenshots/screenshot.png?raw=true)
+<img src="Screenshots/screenshot.png" width="450"/>
 
 #  GenericUI
 
