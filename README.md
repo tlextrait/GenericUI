@@ -16,6 +16,8 @@ GenericUI provides you with beautiful and generic UI elements for your iOS proje
     * [Input for a custom object `T`](#input-for-a-custom-object-t)
     * [Customize the `UIActiveInput`](#customize-the-uiactiveinput)
         * [Styles](#styles)
+        * [Text Input Delegate](#text-input-delegate)
+        * [Touch Events](#touch-events)
         * [Accessibility](#accessibility)
 
 ## Background
@@ -137,6 +139,11 @@ Here are some of the properties you have access to that allow you to customize t
 ### Text Input Delegate
 
 `input.delegate` lets you designate a delegate for the embedded text field.
+
+### Touch Events
+
+By default, the text field will become `firstResponder` if the user taps anywhere on the `UIActiveInput`, including the label. You may also do so
+programmatically by simply calling `input.becomeFirstResponder()` and `input.resignFirstResponder()`.
 
 ### Accessibility
 
