@@ -68,6 +68,8 @@ a way to be converted to and from a `String` (since `UIActiveInput` is based on 
 specifies the best type of iOS keyboard to be used. The `StringTwoWayConvertible`  is a way for you to provide a custom
 String transform.
 
+Using extensions, you may also enable existing or third party types to be returned by the `UIActiveInput`.
+
 Example:
 
 ```
