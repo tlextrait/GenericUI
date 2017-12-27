@@ -115,6 +115,7 @@ let input = UIActiveInput<MyCustomType>()
 ## Customize the `UIActiveInput`
 
 <img alt="Generic User Interface" src="Media/firstname-field.png" width="300"/>
+
 `UIActiveInput` is deeply customizable and is built right on top of the native `UITextField`.
 
 ### Styles
