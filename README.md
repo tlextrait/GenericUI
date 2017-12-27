@@ -79,10 +79,16 @@ class MyCustomType : StringTwoWayConvertible, BestKeyboardType {
     var number: Double
     
     init?(_ text: String) {
+        // Write your own String -> Object transform
         guard let n = Double(text) else {
             return
         }
         number = n
+    }
+    
+    var description: String {
+        // Write your own Object -> String transform
+        return "\(number)"
     }
     
     static var bestKeyboardType: UIKeyboardType {
