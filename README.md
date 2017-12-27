@@ -2,7 +2,7 @@
 
 #  GenericUI
 
-GenericUI provides you with generic UI elements for your iOS projects. For now it just focuses on inputs and forms but there's a lot more to come.
+GenericUI provides you with beautiful and generic UI elements for your iOS projects. For now it just focuses on inputs and forms but there's a lot more to come.
 
 ## Contents
 * [GenericUI](#genericui)
@@ -14,6 +14,9 @@ GenericUI provides you with generic UI elements for your iOS projects. For now i
     * [Input for a `String`](#input-for-a-string)
     * [Input for a `UInt`](#input-for-a-uint)
     * [Input for a custom object `T`](#input-for-a-custom-object-t)
+    * [Customize the `UIActiveInput`](#customize-the-uiactiveinput)
+        * [Styles](#styles)
+        * [Accessibility](#accessibility)
 
 ## Background
 
@@ -108,3 +111,33 @@ class MyCustomType : StringTwoWayConvertible, BestKeyboardType {
 
 let input = UIActiveInput<MyCustomType>()
 ```
+
+## Customize the `UIActiveInput`
+
+<img alt="Generic User Interface" src="Media/firstname-field.png" width="300"/>
+`UIActiveInput` is deeply customizable and is built right on top of the native `UITextField`.
+
+### Styles
+
+Here are some of the properties you have access to that allow you to customize the style:
+* `input.label` exposes the `UILabel` object, which you may directly customize or even remove.
+* `input.inputColor` is the background color of the text field.
+* `input.backgroundColor` is the background color of the whole element.
+* `input.activeColor` is the color of the little vertical indicator, blue by default.
+* `input.indicatorWidth` is the width of the active indicator, 2.0 by default.
+* `input.forcedLabelWidth` allows you to force the label to be a certain width. This is useful when you have multiple inputs and you want the left edge of all text fields to align.
+* `input.placeHolder` sets the placeholder for the text input.
+* `input.font` sets the font for the text input.
+* `input.textColor` sets the text color for the text input.
+* `input.layer` gives you access to the design layer of the whole element if you'd like to make deeper customizations.
+* `input.inputLayer` gives you access to the design layer of the text input.
+* `input.keyboardType` lets you set a keyboard type for the text input (note this is always set automatically, but you may override it by setting it manually).
+
+### Text Input Delegate
+
+`input.delegate` lets you designate a delegate for the embedded text field.
+
+### Accessibility
+
+The `UIActiveInput` provides you with all the standard accessbility functionality and relays all those calls to the embedded text input
+(blind users should "see" the `UIActiveInput` the same as a regular `UITextField`).
