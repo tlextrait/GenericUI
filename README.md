@@ -45,7 +45,7 @@ a lot more to come...
 
 The code below will make an input labeled "Firstname". It allows the user to enter text and the output will be a `String`.
 
-```
+```swift
 let input = UIActiveInput<String>("Firstname")
 addSubview(input)
 let firstname: String = input.output // returns String?
@@ -56,7 +56,7 @@ let firstname: String = input.output // returns String?
 Below is an example of an input that gathers an unsigned integer from the user. The ouput is a `UInt`. The `UIActiveInput` is
 smart and automatically sets the keyboard to a numeric pad with no decimal point.
 
-```
+```swift
 let input = UIActiveInput<UInt>("Age")
 addSubview(input)
 let age: UInt = input.output // returns UInt?
@@ -74,7 +74,7 @@ Using extensions, you may also enable existing or third party types to be return
 
 Example:
 
-```
+```swift
 class MyCustomType : StringTwoWayConvertible, BestKeyboardType {
     var number: Double
     
