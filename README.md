@@ -1,4 +1,4 @@
-<img src="Screenshots/screenshot.png" width="450"/>
+<img src="Media/preview.gif" width="450"/>
 
 #  GenericUI
 
