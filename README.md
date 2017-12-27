@@ -46,7 +46,7 @@ The code below will make an input labeled "Firstname". It allows the user to ent
 ```
 let input = UIActiveInput<String>("Firstname")
 addSubview(input)
-let firstname: String = input.output
+let firstname: String = input.output // returns String?
 ```
 
 ### Gathering a `UInt`
@@ -57,5 +57,34 @@ smart and automatically sets the keyboard to a numeric pad with no decimal point
 ```
 let input = UIActiveInput<UInt>("Age")
 addSubview(input)
-let age: UInt = input.output
+let age: UInt = input.output // returns UInt?
+```
+
+### Gathering a custom object `T`
+
+You may gather your own type of model from a `UIActiveInput`, however it will need to conform with a couple protocols,
+namely: `StringTwoWayConvertible` and `BestKeyboardType`. The purpose of these protocols is to ensure your object provides
+a way to be converted to and from a `String` (since `UIActiveInput` is based on top of the native `UITextField`) and
+specifies the best type of iOS keyboard to be used. The `StringTwoWayConvertible`  is a way for you to provide a custom
+String transform.
+
+Example:
+
+```
+class MyCustomType : StringTwoWayConvertible, BestKeyboardType {
+    var number: Double
+    
+    init?(_ text: String) {
+        guard let n = Double(text) else {
+            return
+        }
+        number = n
+    }
+    
+    static var bestKeyboardType: UIKeyboardType {
+        return .decimalPad
+    }
+}
+
+let input = UIActiveInput<MyCustomType>()
 ```
