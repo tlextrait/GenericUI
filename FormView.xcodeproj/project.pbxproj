@@ -29,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		E909B6771FEED87F006ECAC1 /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
+		E909B6781FF3249F006ECAC1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E9C185E51FE9BF1E00857300 /* FormView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FormView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9C185E81FE9BF1E00857300 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9C185EA1FE9BF1E00857300 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +68,7 @@
 				E9C185E71FE9BF1E00857300 /* FormView */,
 				E9C186091FEDD09600857300 /* FormViewTests */,
 				E9C185E61FE9BF1E00857300 /* Products */,
+				E909B6781FF3249F006ECAC1 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
