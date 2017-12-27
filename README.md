@@ -135,6 +135,10 @@ Here are some of the properties you have access to that allow you to customize t
 * `input.layer` gives you access to the design layer of the whole element if you'd like to make deeper customizations.
 * `input.inputLayer` gives you access to the design layer of the text input.
 * `input.keyboardType` lets you set a keyboard type for the text input (note this is always set automatically, but you may override it by setting it manually).
+* `input.layoutMargins` lets you customize the margins within the element (space between the label and text input from the edges of the `UIActiveInput`).
+
+*A lot more that I won't get into here...* `UIActiveInput` is a subclass of `UITextField`, which is a sublcass of `UIView` so all the properties and methods you
+expect to find on those you will find on `UIActiveInput`.
 
 ### Text Input Delegate
 
