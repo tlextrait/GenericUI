@@ -205,6 +205,55 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return delegate?.textFieldShouldReturn?(textField) ?? true
     }
+    
+    //
+    // MARK: - Accessibility
+    //
+    
+    override open var accessibilityHint: String? {
+        set { inputField.accessibilityHint = newValue }
+        get { return inputField.accessibilityHint }
+    }
+    
+    override open var accessibilityValue: String? {
+        set { inputField.accessibilityValue = newValue }
+        get { return inputField.accessibilityValue }
+    }
+    
+    override open var accessibilityLabel: String? {
+        set { inputField.accessibilityLabel = newValue }
+        get { return inputField.accessibilityLabel }
+    }
+    
+    override open var accessibilityAttributedHint: NSAttributedString? {
+        set { inputField.accessibilityAttributedHint = newValue }
+        get { return inputField.accessibilityAttributedHint }
+    }
+    
+    override open var accessibilityAttributedValue: NSAttributedString? {
+        set { inputField.accessibilityAttributedValue = newValue }
+        get { return inputField.accessibilityAttributedValue }
+    }
+    
+    override open var accessibilityAttributedLabel: NSAttributedString? {
+        set { inputField.accessibilityAttributedLabel = newValue }
+        get { return inputField.accessibilityAttributedLabel }
+    }
+    
+    override open var accessibilityLanguage: String? {
+        set { inputField.accessibilityLanguage = newValue }
+        get { return inputField.accessibilityLanguage }
+    }
+    
+    override open var accessibilityContainerType: UIAccessibilityContainerType {
+        set { inputField.accessibilityContainerType = newValue }
+        get { return inputField.accessibilityContainerType }
+    }
+    
+    override open var isAccessibilityElement: Bool {
+        set { inputField.isAccessibilityElement = newValue }
+        get { return inputField.isAccessibilityElement }
+    }
 }
 
 //

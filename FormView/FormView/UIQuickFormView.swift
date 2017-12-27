@@ -159,8 +159,13 @@ extension UIQuickFormView {
         
         for row in mappedViews {
             
+            if row.isEmpty {
+                continue
+            }
+            
             let isFirstRow = (firstViewInPreviousRow == nil)
             let isLastRow = (rCounter == mappedViews.count - 1)
+            let firstViewInThisRow = row.first!.view
             var rowTotalSize: UInt = 0
             for e in row {
                 rowTotalSize += e.size
@@ -179,6 +184,9 @@ extension UIQuickFormView {
                 //
                 // Setup constraints
                 //
+                
+                view.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+                view.setContentHuggingPriority(.defaultHigh, for: .horizontal)
                 
                 // Top
                 if isFirstRow {
@@ -221,6 +229,7 @@ extension UIQuickFormView {
                 vCounter+=1
             }
             
+            firstViewInPreviousRow = firstViewInThisRow
             previousViewInSameRow = nil
             rCounter+=1
         }

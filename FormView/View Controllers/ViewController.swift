@@ -113,7 +113,7 @@ class ViewController: UIViewController {
         userForm.addRow([FormElement(idTitle)])
         userForm.addRow([FormElement(idFirstname), FormElement(idLastname)])
         userForm.addRow([FormElement(idAddress)])
-        //userForm.addRow([FormElement(idAge), FormElement.spacer(size: 2)])
+        userForm.addRow([FormElement(idAge), FormElement.spacer(size: 2)])
         
         // Form constraints
         userForm.translatesAutoresizingMaskIntoConstraints = false
