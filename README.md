@@ -223,6 +223,14 @@ let inputIndentifier = form.bind(input: textInput) { (..., input: UITextField) i
 
 ### Adding a view to a form
 
+You may add any kind of view to the `UIQuickFormView`.
+Example:
+
+```swift
+let label = UILabel(frame: .zero)
+let viewIndentifier = form.bind(view: label)
+```
+
 ### Notes regarding forms:
 
 * One form can only be used to gather one model type.
