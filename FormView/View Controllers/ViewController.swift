@@ -123,6 +123,45 @@ class ViewController: UIViewController {
         userForm.setRecommendedContentPriorities()
         userForm.build()
         
+        
+        
+        let form = UIQuickFormView<CGSize>()
+        view.addSubview(form)
+        form.backgroundColor = .green
+        form.layer.cornerRadius = 3.0
+        form.translatesAutoresizingMaskIntoConstraints = false
+        form.topAnchor.constraint(equalTo: userForm.bottomAnchor, constant: 50.0).isActive = true
+        form.leadingAnchor.constraint(equalTo: margins.leadingAnchor, constant: 8.0).isActive = true
+        form.trailingAnchor.constraint(equalTo: margins.trailingAnchor, constant: -8.0).isActive = true
+        
+        let widthInput = UIActiveInput<CGFloat>(label: "WIDTH")
+        let heightInput = UIActiveInput<CGFloat>(label: "HEIGHT")
+        
+        // Bind the inputs
+        let widthInputId = form.bind(input: widthInput) { (size: inout CGSize, input: UIActiveInput<CGFloat>) in
+            guard let width = input.output else {
+                // handle any errors here
+                return
+            }
+            size.width = width
+        }
+        let heightInputId = form.bind(input: heightInput) { (size: inout CGSize, input: UIActiveInput<CGFloat>) in
+            guard let height = input.output else {
+                // handle any errors here
+                return
+            }
+            size.height = height
+        }
+        
+        // Lay out the inputs in the form (both inputs go on the same line here)
+        form.addRow([FormElement(widthInputId), FormElement(heightInputId)])
+        form.setRecommendedContentPriorities()
+        form.build()
+        
+        // When you want to resolve the form to a CGSize:
+        var s = CGSize(width: 0, height: 0)
+        let size = form.resolve(model: &s)
+        
         //
         // Button
         //
@@ -138,7 +177,8 @@ class ViewController: UIViewController {
     }
     
     @objc func doneTapped() {
-        let person = userForm.resolve(model: Person())
+        var p = Person()
+        let person = userForm.resolve(model: &p)
         print(person)
     }
 

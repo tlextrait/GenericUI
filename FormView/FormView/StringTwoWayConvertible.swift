@@ -27,11 +27,20 @@ extension Int16 : StringTwoWayConvertible {}
 extension Int32 : StringTwoWayConvertible {}
 extension Int64 : StringTwoWayConvertible {}
 extension Double : StringTwoWayConvertible {}
+extension CGFloat : StringTwoWayConvertible {
+    public init?(_ text: String) {
+        if let d = Double(text) {
+            self.init(d)
+        } else {
+            return nil
+        }
+    }
+}
 extension Float : StringTwoWayConvertible {}
 extension Float80 : StringTwoWayConvertible {}
 extension String : StringTwoWayConvertible {
     public init?(_ text: String) {
-        self.init(text as! NSString)
+        self.init(text as NSString)
     }
 }
 
@@ -60,6 +69,10 @@ extension Int64 : BestKeyboardType {
 }
 
 extension Double : BestKeyboardType {
+    public static var bestKeyboardType: UIKeyboardType { return .decimalPad }
+}
+
+extension CGFloat : BestKeyboardType {
     public static var bestKeyboardType: UIKeyboardType { return .decimalPad }
 }
 

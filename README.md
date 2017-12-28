@@ -107,7 +107,7 @@ let input = UIActiveInput<MyCustomType>()
 
 ## Customize the `UIActiveInput`
 
-<img alt="Generic User Interface" src="Media/firstname-field.png" width="300"/>
+<img alt="Firstname Field" src="Media/firstname-field.png" width="300"/>
 
 `UIActiveInput` is deeply customizable and is built right on top of the native `UITextField`. It is essentially a `UIView` that wraps
 a `UILabel`, a `UITextField` and a `UIView` used to show whether the input is active or not.
@@ -148,23 +148,28 @@ The `UIActiveInput` provides you with all the standard accessbility functionalit
 
 ## A Simple Form
 
+<img alt="Simple Form" src="Media/cgsize-form.png" width="300"/>
+
 Here's an example of a very simple form with two inputs in it. The goal of this form is to collect a `CGSize`, one input for the width and one for the height.
 
 ```swift
 let form = UIQuickFormView<CGSize>()
-addSubview(form)
-let widthInput = UIActiveInput<Int>("WIDTH")
-let heightInput = UIActiveInput<Int>("HEIGHT")
+view.addSubview(form)
+form.backgroundColor = .green
+form.layer.cornerRadius = 3.0
+
+let widthInput = UIActiveInput<CGFloat>(label: "WIDTH")
+let heightInput = UIActiveInput<CGFloat>(label: "HEIGHT")
 
 // Bind the inputs
-let widthInputId = form.bind(input: widthInput) { (size: CGSize, input: UIActiveInput<Int>) in
+let widthInputId = form.bind(input: widthInput) { (size: inout CGSize, input: UIActiveInput<CGFloat>) in
     guard let width = input.output else {
         // handle any errors here
         return
     }
     size.width = width
 }
-let heightInputId = form.bind(input: widthInput) { (size: CGSize, input: UIActiveInput<Int>) in
+let heightInputId = form.bind(input: heightInput) { (size: inout CGSize, input: UIActiveInput<CGFloat>) in
     guard let height = input.output else {
         // handle any errors here
         return
@@ -178,5 +183,6 @@ form.setRecommendedContentPriorities()
 form.build()
 
 // When you want to resolve the form to a CGSize:
-let size = form.resolve(model: CGSize(width: 0, height: 0))
+var s = CGSize(width: 0, height: 0)
+let size = form.resolve(model: &s)
 ```
