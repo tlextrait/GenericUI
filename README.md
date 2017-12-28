@@ -159,12 +159,14 @@ let heightInput = UIActiveInput<Int>("HEIGHT")
 // Bind the inputs
 let widthInputId = form(input: widthInput) { (size: CGSize, input: UIActiveInput<Int>) in
     guard let width = input.output else {
+        // handle any errors here
         return
     }
     size.width = width
 }
 let heightInputId = form(input: widthInput) { (size: CGSize, input: UIActiveInput<Int>) in
     guard let height = input.output else {
+        // handle any errors here
         return
     }
     size.height = height
@@ -175,6 +177,6 @@ form.addRow([FormElement(widthInputId), FormElement(heightInputId)])
 form.setRecommendedContentPriorities()
 form.build()
 
-// Whene you want to resolve the form to a CGSize:
+// When you want to resolve the form to a CGSize:
 let size = form.resolve(model: CGSize(width: 0, height: 0))
 ```
