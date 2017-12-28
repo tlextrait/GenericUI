@@ -21,7 +21,10 @@ GenericUI provides you with beautiful and generic UI elements for your iOS proje
         * [Accessibility](#accessibility)
     * [A Simple Form](#a-simple-form)
         * [Form for CGSize](#form-for-cgsize)
-        * [Notes regarding forms](#notes-regarding-forms)
+        * [Adding a native input to a form](#adding-a-native-input-to-a-form)
+        * [Adding a view to a form](#adding-a-view-to-a-form)
+        * [Customizing form element sizes](#customizing-form-element-sizes)
+        * [Spacers](#spacers)
 
 # Components
 
@@ -210,7 +213,7 @@ class ViewController : UIViewController {
 ### Adding a native input to a form
 
 You may add any kind of input to the `UIQuickFormView`, including native and third party.
-Example:
+
 ```swift
 let textInput = UITextField(frame: .zero)
 let inputIndentifier = form.bind(input: textInput) { (..., input: UITextField) in
@@ -225,7 +228,6 @@ form.addRow([..., FormElement(inputIndentifier), ...])
 ### Adding a view to a form
 
 You may add any kind of view to the `UIQuickFormView`.
-Example:
 
 ```swift
 let label = UILabel(frame: .zero)
@@ -233,9 +235,18 @@ let viewIndentifier = form.bind(view: label)
 form.addRow([..., FormElement(viewIndentifier), ...])
 ```
 
-### Notes regarding forms:
+### Customizing form element sizes
 
-* One form can only be used to gather one model type.
-* Handle errors and how the UI reflects those errors in the bindings.
-* Any kind of input, including third party and native inputs can be used in the forms.
-* Any kind of view can be added to forms.
+You may customize how much horizontal space every element takes within a line of the form.
+
+```swift
+form.addRow([FormElement(input, size: 2), FormElement(view, size: 1), ...])
+```
+
+### Spacers
+
+`UIQuickFormView` provides an easy way to create spacers.
+
+```swift
+form.addRow([FormElement.makeSpacer(size: 3), FormElement(view, size: 1), ...])
+```
