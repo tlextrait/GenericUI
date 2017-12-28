@@ -19,16 +19,7 @@ GenericUI provides you with beautiful and generic UI elements for your iOS proje
         * [Text Input Delegate](#text-input-delegate)
         * [Touch Events](#touch-events)
         * [Accessibility](#accessibility)
-
-## Background
-
-I decided to start with inputs and forms because I feel like we tend to write a lot of boiler plate code there. We use `UITextField` a lot to
-gather information from the user, even information that shouldn't be represented as a string. Then we do conversions, sanitization, error
-handling and so forth. We usually duplicate this code for every text input, and from a project to another. Then we assemble all the values
-from our inputs to build a model, which may involve some boiler plate code too. Generic UI also solves the problem of laying out your
-views using AutoLayout. Laying out a form is very complex because we have a lot of inputs of varying dimensions. GenericUI solves
-both the problem of laying things out for you using a simple high level API as well as guaranteeing type safety at compile time using
-generics.
+    * [A Simple Form](#a-simple-form)
 
 # Components
 
@@ -118,7 +109,8 @@ let input = UIActiveInput<MyCustomType>()
 
 <img alt="Generic User Interface" src="Media/firstname-field.png" width="300"/>
 
-`UIActiveInput` is deeply customizable and is built right on top of the native `UITextField`.
+`UIActiveInput` is deeply customizable and is built right on top of the native `UITextField`. It is essentially a `UIView` that wraps
+a `UILabel`, a `UITextField` and a `UIView` used to show whether the input is active or not.
 
 ### Styles
 
@@ -137,7 +129,7 @@ Here are some of the properties you have access to that allow you to customize t
 * `input.keyboardType` lets you set a keyboard type for the text input (note this is always set automatically, but you may override it by setting it manually).
 * `input.layoutMargins` lets you customize the margins within the element (space between the label and text input from the edges of the `UIActiveInput`).
 
-*A lot more that I won't get into here...* `UIActiveInput` is a subclass of `UITextField`, which is a sublcass of `UIView` so all the properties and methods you
+*A lot more that I can't list here...* `UIActiveInput` is a subclass of `UITextField`, which is a sublcass of `UIView` so all the properties and methods you
 expect to find on those you will find on `UIActiveInput`.
 
 ### Text Input Delegate
@@ -153,3 +145,36 @@ programmatically by simply calling `input.becomeFirstResponder()` and `input.res
 
 The `UIActiveInput` provides you with all the standard accessbility functionality and relays all those calls to the embedded text input
 (blind users should "see" the `UIActiveInput` the same as a regular `UITextField`).
+
+## A Simple Form
+
+Here's an example of a very simple form with two inputs in it. The goal of this form is to collect a `CGSize`, one input for the width and one for the height.
+
+```swift
+let form = UIQuickFormView<CGSize>()
+addSubview(form)
+let widthInput = UIActiveInput<Int>("WIDTH")
+let heightInput = UIActiveInput<Int>("HEIGHT")
+
+// Bind the inputs
+let widthInputId = form(input: widthInput) { (size: CGSize, input: UIActiveInput<Int>) in
+    guard let width = input.output else {
+        return
+    }
+    size.width = width
+}
+let heightInputId = form(input: widthInput) { (size: CGSize, input: UIActiveInput<Int>) in
+    guard let height = input.output else {
+        return
+    }
+    size.height = height
+}
+
+// Lay out the inputs in the form (both inputs go on the same line here)
+form.addRow([FormElement(widthInputId), FormElement(heightInputId)])
+form.setRecommendedContentPriorities()
+form.build()
+
+// Whene you want to resolve the form to a CGSize:
+let size = form.resolve(model: CGSize(width: 0, height: 0))
+```
