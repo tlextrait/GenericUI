@@ -20,6 +20,8 @@ GenericUI provides you with beautiful and generic UI elements for your iOS proje
         * [Touch Events](#touch-events)
         * [Accessibility](#accessibility)
     * [A Simple Form](#a-simple-form)
+        * [Form for CGSize](#form-for-cgsize)
+        * [Notes regarding forms](#notes-regarding-forms)
 
 # Components
 
@@ -148,6 +150,8 @@ The `UIActiveInput` provides you with all the standard accessbility functionalit
 
 ## A Simple Form
 
+### Form for CGSize
+
 <img alt="Simple Form" src="Media/cgsize-form.png" width="300"/>
 
 Here's an example of a very simple form with two inputs in it. The goal of this form is to collect a `CGSize`, one input for the width and one for the height.
@@ -193,7 +197,7 @@ class ViewController : UIViewController {
         // Lay out the inputs in the form (both inputs go on the same line here)
         form.addRow([FormElement(widthInputId), FormElement(heightInputId)])
         form.setRecommendedContentPriorities()
-        form.build()
+        form.build() // sets up autolayout constraints for all the views within the form
 
         // When you want to resolve the form to a CGSize:
         var s = CGSize(width: 0, height: 0)
@@ -202,3 +206,10 @@ class ViewController : UIViewController {
     
 }
 ```
+
+### Notes regarding forms:
+
+* One form can only be used to gather one model type.
+* Handle errors and how the UI reflects those errors in the bindings.
+* Any kind of input, including third party and native inputs can be used in the forms.
+* Any kind of view can be added to forms.
