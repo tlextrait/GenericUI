@@ -207,6 +207,22 @@ class ViewController : UIViewController {
 }
 ```
 
+### Adding a native input to a form
+
+You may add any kind of input to the `UIQuickFormView`, including native and third party.
+Example:
+```swift
+let textInput = UITextField(frame: .zero)
+let inputIndentifier = form.bind(input: textInput) { (..., input: UITextField) in
+    guard let text = input.text else {
+        ...
+    }
+    ...
+}
+```
+
+### Adding a view to a form
+
 ### Notes regarding forms:
 
 * One form can only be used to gather one model type.
