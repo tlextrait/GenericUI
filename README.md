@@ -219,6 +219,7 @@ let inputIndentifier = form.bind(input: textInput) { (..., input: UITextField) i
     }
     ...
 }
+form.addRow([..., FormElement(inputIndentifier), ...])
 ```
 
 ### Adding a view to a form
@@ -229,6 +230,7 @@ Example:
 ```swift
 let label = UILabel(frame: .zero)
 let viewIndentifier = form.bind(view: label)
+form.addRow([..., FormElement(viewIndentifier), ...])
 ```
 
 ### Notes regarding forms:
