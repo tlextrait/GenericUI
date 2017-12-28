@@ -153,36 +153,49 @@ The `UIActiveInput` provides you with all the standard accessbility functionalit
 Here's an example of a very simple form with two inputs in it. The goal of this form is to collect a `CGSize`, one input for the width and one for the height.
 
 ```swift
-let form = UIQuickFormView<CGSize>()
-view.addSubview(form)
-form.backgroundColor = .green
-form.layer.cornerRadius = 3.0
+class ViewController : UIViewController {
 
-let widthInput = UIActiveInput<CGFloat>(label: "WIDTH")
-let heightInput = UIActiveInput<CGFloat>(label: "HEIGHT")
+    override func viewDidLoad() {
+    
+        //...
+        
+        let form = UIQuickFormView<CGSize>()
+        view.addSubview(form)
+        form.backgroundColor = .green
+        form.layer.cornerRadius = 3.0
+        form.translatesAutoresizingMaskIntoConstraints = false
+        form.topAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: 10.0).isActive = true
+        form.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 8.0).isActive = true
+        form.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -8.0).isActive = true
 
-// Bind the inputs
-let widthInputId = form.bind(input: widthInput) { (size: inout CGSize, input: UIActiveInput<CGFloat>) in
-    guard let width = input.output else {
-        // handle any errors here
-        return
+        let widthInput = UIActiveInput<CGFloat>(label: "WIDTH")
+        let heightInput = UIActiveInput<CGFloat>(label: "HEIGHT")
+
+        // Bind the inputs
+        let widthInputId = form.bind(input: widthInput) { (size: inout CGSize, input: UIActiveInput<CGFloat>) in
+            guard let width = input.output else {
+                // handle any errors here
+                return
+            }
+            size.width = width
+        }
+        let heightInputId = form.bind(input: heightInput) { (size: inout CGSize, input: UIActiveInput<CGFloat>) in
+            guard let height = input.output else {
+                // handle any errors here
+                return
+            }
+            size.height = height
+        }
+
+        // Lay out the inputs in the form (both inputs go on the same line here)
+        form.addRow([FormElement(widthInputId), FormElement(heightInputId)])
+        form.setRecommendedContentPriorities()
+        form.build()
+
+        // When you want to resolve the form to a CGSize:
+        var s = CGSize(width: 0, height: 0)
+        let size = form.resolve(model: &s)
     }
-    size.width = width
+    
 }
-let heightInputId = form.bind(input: heightInput) { (size: inout CGSize, input: UIActiveInput<CGFloat>) in
-    guard let height = input.output else {
-        // handle any errors here
-        return
-    }
-    size.height = height
-}
-
-// Lay out the inputs in the form (both inputs go on the same line here)
-form.addRow([FormElement(widthInputId), FormElement(heightInputId)])
-form.setRecommendedContentPriorities()
-form.build()
-
-// When you want to resolve the form to a CGSize:
-var s = CGSize(width: 0, height: 0)
-let size = form.resolve(model: &s)
 ```
