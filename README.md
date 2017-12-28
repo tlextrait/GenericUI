@@ -157,14 +157,14 @@ let widthInput = UIActiveInput<Int>("WIDTH")
 let heightInput = UIActiveInput<Int>("HEIGHT")
 
 // Bind the inputs
-let widthInputId = form(input: widthInput) { (size: CGSize, input: UIActiveInput<Int>) in
+let widthInputId = form.bind(input: widthInput) { (size: CGSize, input: UIActiveInput<Int>) in
     guard let width = input.output else {
         // handle any errors here
         return
     }
     size.width = width
 }
-let heightInputId = form(input: widthInput) { (size: CGSize, input: UIActiveInput<Int>) in
+let heightInputId = form.bind(input: widthInput) { (size: CGSize, input: UIActiveInput<Int>) in
     guard let height = input.output else {
         // handle any errors here
         return
