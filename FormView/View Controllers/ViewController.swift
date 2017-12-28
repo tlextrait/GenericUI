@@ -123,7 +123,22 @@ class ViewController: UIViewController {
         userForm.setRecommendedContentPriorities()
         userForm.build()
         
+        //
+        // Button
+        //
         
+        let button = UIButton(frame: .zero)
+        view.addSubview(button)
+        
+        button.setTitle("Done", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.topAnchor.constraint(equalTo: userForm.bottomAnchor, constant: 10.0).isActive = true
+        button.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
+        button.addTarget(self, action: #selector(self.doneTapped), for: UIControlEvents.allTouchEvents)
+        
+        //
+        // CGSize Form
+        //
         
         let form = UIQuickFormView<CGSize>()
         view.addSubview(form)
@@ -161,19 +176,6 @@ class ViewController: UIViewController {
         // When you want to resolve the form to a CGSize:
         var s = CGSize(width: 0, height: 0)
         let size = form.resolve(model: &s)
-        
-        //
-        // Button
-        //
-        
-        let button = UIButton(frame: .zero)
-        view.addSubview(button)
-        
-        button.setTitle("Done", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.topAnchor.constraint(equalTo: userForm.bottomAnchor, constant: 10.0).isActive = true
-        button.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
-        button.addTarget(self, action: #selector(self.doneTapped), for: UIControlEvents.allTouchEvents)
     }
     
     @objc func doneTapped() {
