@@ -240,6 +240,8 @@ form.addRow([..., FormElement(viewIndentifier), ...])
 <img alt="custom element size" src="Media/custom-size.png" width="300"/>
 
 You may customize how much horizontal space every element takes within a line of the form.
+The default size value is `1`. If all the elements in a row are the same size number then they'll
+each take an equal share of the horizontal space.
 
 ```swift
 form.addRow([FormElement(input, size: 2), FormElement(view, size: 1), ...])
