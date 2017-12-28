@@ -155,7 +155,7 @@ The `UIActiveInput` provides you with all the standard accessbility functionalit
 
 ### Form for CGSize
 
-<img alt="Simple Form" src="Media/cgsize-form.png" width="300"/>
+<img alt="simple form" src="Media/cgsize-form.png" width="300"/>
 
 Here's an example of a very simple form with two inputs in it. The goal of this form is to collect a `CGSize`, one input for the width and one for the height.
 
@@ -244,6 +244,8 @@ form.addRow([FormElement(input, size: 2), FormElement(view, size: 1), ...])
 ```
 
 ### Spacers
+
+<img alt="spacer" src="Media/spacer.png" width="300"/>
 
 `UIQuickFormView` provides an easy way to create spacers.
 
