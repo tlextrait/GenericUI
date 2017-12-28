@@ -156,11 +156,14 @@ Here's an example of a very simple form with two inputs in it. The goal of this 
 class ViewController : UIViewController {
 
     override func viewDidLoad() {
-    
+        super.viewDidLoad()
+        
         //...
         
         let form = UIQuickFormView<CGSize>()
         view.addSubview(form)
+        
+        // Form styling and layout
         form.backgroundColor = .green
         form.layer.cornerRadius = 3.0
         form.translatesAutoresizingMaskIntoConstraints = false
