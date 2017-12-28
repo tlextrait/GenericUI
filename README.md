@@ -227,6 +227,8 @@ form.addRow([..., FormElement(inputIndentifier), ...])
 
 ### Adding a view to a form
 
+<img alt="label" src="Media/label.png" width="300"/>
+
 You may add any kind of view to the `UIQuickFormView`.
 
 ```swift
