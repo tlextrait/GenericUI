@@ -111,7 +111,7 @@ class ViewController: UIViewController {
         
         // Lay things out on the form
         userForm.addRow([FormElement(idTitle)])
-        userForm.addRow([FormElement(idFirstname), FormElement(idLastname)])
+        userForm.addRow([FormElement(idFirstname, size: 2), FormElement(idLastname, size: 1)])
         userForm.addRow([FormElement(idAddress)])
         userForm.addRow([FormElement(idAge), FormElement.spacer(size: 2)])
         

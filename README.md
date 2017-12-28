@@ -237,6 +237,8 @@ form.addRow([..., FormElement(viewIndentifier), ...])
 
 ### Customizing form element sizes
 
+<img alt="custom element size" src="Media/custom-size.png" width="300"/>
+
 You may customize how much horizontal space every element takes within a line of the form.
 
 ```swift
