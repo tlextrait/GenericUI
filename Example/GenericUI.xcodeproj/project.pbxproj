@@ -517,7 +517,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FormView.app/FormView";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GenericUI_Example.app/GenericUI_Example";
 			};
 			name = Debug;
 		};
@@ -534,7 +534,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FormView.app/FormView";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GenericUI_Example.app/GenericUI_Example";
 			};
 			name = Release;
 		};

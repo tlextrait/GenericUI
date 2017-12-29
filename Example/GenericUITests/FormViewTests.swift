@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import FormView
+@testable import GenericUI
 
 class FormViewTests: XCTestCase {
     
@@ -33,7 +33,7 @@ class FormViewTests: XCTestCase {
         
         let firstnameField = UIActiveInput<String>()
         
-        let firstnameBinding = form.bind(input: firstnameField) { (p: Person, input: UIActiveInput<String>) in
+        let firstnameBinding = form.bind(input: firstnameField) { (p, input) in
             guard let firstname = input.output else {
                 // Any error handling would go here :)
                 return
@@ -52,7 +52,8 @@ class FormViewTests: XCTestCase {
         XCTAssertEqual(firstnameField.output, "John")
         
         // Ask the form to build the model
-        let person = form.resolve(model: Person())
+        var p = Person()
+        let person = form.resolve(model: &p)
         
         XCTAssertEqual(person.firstname, "John")
     }
@@ -73,14 +74,14 @@ class FormViewTests: XCTestCase {
         let lastnameField = UIActiveInput<String>()
         let ageField = UIActiveInput<Int>()
         
-        let firstnameBinding = form.bind(input: firstnameField) { (p: Person, input: UIActiveInput<String>) in
+        let firstnameBinding = form.bind(input: firstnameField) { (p, input) in
             guard let firstname = input.output else {
                 // Any error handling would go here :)
                 return
             }
             p.firstname = firstname
         }
-        let lastnameBinding = form.bind(input: lastnameField) { (p: Person, input: UIActiveInput<String>) in
+        let lastnameBinding = form.bind(input: lastnameField) { (p, input) in
             guard let lastname = input.output else {
                 // Any error handling would go here :)
                 return
@@ -89,7 +90,7 @@ class FormViewTests: XCTestCase {
         }
         form.addRow([FormElement(firstnameBinding, size: 1), FormElement.spacer(size: 10), FormElement(lastnameBinding, size: 1)])
         
-        let ageBinding = form.bind(input: ageField) { (p: Person, input: UIActiveInput<Int>) in
+        let ageBinding = form.bind(input: ageField) { (p, input) in
             guard let age = input.output else {
                 return
             }
@@ -113,7 +114,8 @@ class FormViewTests: XCTestCase {
         XCTAssertEqual(ageField.output, 26)
         
         // Ask the form to build the model
-        let person = form.resolve(model: Person())
+        var p = Person()
+        let person = form.resolve(model: &p)
         
         XCTAssertEqual(person.firstname, "John")
         XCTAssertEqual(person.lastname, "Smith")
@@ -136,14 +138,14 @@ class FormViewTests: XCTestCase {
         let lastnameField = UITextField(frame: .zero)   // native input
         let ageField = UIActiveInput<Int>()
         
-        let firstnameBinding = form.bind(input: firstnameField) { (p: Person, input: UIActiveInput<String>) in
+        let firstnameBinding = form.bind(input: firstnameField) { (p, input) in
             guard let firstname = input.output else {
                 // Any error handling would go here :)
                 return
             }
             p.firstname = firstname
         }
-        let lastnameBinding = form.bind(input: lastnameField) { (p: Person, input: UITextField) in
+        let lastnameBinding = form.bind(input: lastnameField) { (p, input) in
             guard let lastname = input.text else {
                 // Any error handling would go here :)
                 return
@@ -152,7 +154,7 @@ class FormViewTests: XCTestCase {
         }
         form.addRow([FormElement(firstnameBinding, size: 1), FormElement.spacer(size: 10), FormElement(lastnameBinding, size: 1)])
         
-        let ageBinding = form.bind(input: ageField) { (p: Person, input: UIActiveInput<Int>) in
+        let ageBinding = form.bind(input: ageField) { (p, input) in
             guard let age = input.output else {
                 // Any error handling would go here :)
                 return
@@ -177,7 +179,8 @@ class FormViewTests: XCTestCase {
         XCTAssertEqual(ageField.output, 26)
         
         // Ask the form to build the model
-        let person = form.resolve(model: Person())
+        var p = Person()
+        let person = form.resolve(model: &p)
         
         XCTAssertEqual(person.firstname, "John")
         XCTAssertEqual(person.lastname, "Smith")
