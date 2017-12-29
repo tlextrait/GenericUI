@@ -22,21 +22,20 @@ GenericUI provides you with beautiful and generic UI elements for your iOS proje
                        DESC
 
   s.homepage         = 'https://github.com/tlextrait/GenericUI'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'tlextrait' => 'thomas.lextrait@gmail.com' }
   s.source           = { :git => 'https://github.com/tlextrait/GenericUI.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-
+  
   s.ios.deployment_target = '10.0'
 
-  # s.source_files = 'MyLib/Classes/**/*'
+  s.source_files = 'GenericUI/Classes/*'
+  s.frameworks = 'UIKit'
   
+  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   # s.resource_bundles = {
   #   'MyLib' => ['MyLib/Assets/*.png']
   # }
-
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 end
