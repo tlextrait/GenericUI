@@ -16,10 +16,10 @@ script:
   - xcodebuild
     -workspace Example/${POD_NAME}.xcworkspace
     -scheme ${POD_NAME}_Example
-    -sdk ${IPHONE_SIMULATOR}
-    -destination ${DESTINATION}
+    -sdk "$IPHONE_SIMULATOR"
+    -destination "$DESTINATION"
     ONLY_ACTIVE_ARCH=NO
-    SWIFT_VERSION=${SWIFT_VERSION}
+    SWIFT_VERSION="$SWIFT_VERSION"
     test | xcpretty
   - pod lib lint
 
