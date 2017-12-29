@@ -6,12 +6,29 @@ branches:
   - master
 
 install:
+- gem install xcpretty
 - git config --global user.email "bots@cocoapods.org"
 - git config --global user.name "CocoaPods Bot"
 
+matrix:
+  include:
+    - osx_image: xcode9
+      env: SCHEME="iOS"    SDK="iphonesimulator11.0"  DESTINATION="OS=11.0,name=iPhone 8"          SWIFT_VERSION="4.0"
+
 script:
-- echo ${POD_NAME}
-- set -o pipefail && xcodebuild test -enableCodeCoverage YES -workspace Example/${POD_NAME}.xcworkspace -scheme ${POD_NAME}-Example -sdk iphonesimulator9.3 ONLY_ACTIVE_ARCH=NO | xcpretty
+  - set -o pipefail
+  - xcodebuild -version
+  - xcodebuild -showsdks
+  - xcodebuild
+    -workspace Example/${POD_NAME}.xcworkspace
+    -scheme ${POD_NAME}-Example
+    -sdk "iphonesimulator11.0"
+    -destination "OS=11.0,name=iPhone 8"
+    ONLY_ACTIVE_ARCH=NO
+    SWIFT_VERSION=$SWIFT_VERSION
+    test | xcpretty
+
+#- set -o pipefail && xcodebuild test -enableCodeCoverage YES -workspace Example/${POD_NAME}.xcworkspace -scheme ${POD_NAME}-Example -sdk iphonesimulator9.3 ONLY_ACTIVE_ARCH=NO | xcpretty
 - pod lib lint
 
 #xcode_project: GenericUI.xcodeproj # path to your xcodeproj folder
