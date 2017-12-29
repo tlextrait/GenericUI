@@ -6,7 +6,7 @@ GenericUI provides you with beautiful and generic UI elements for your iOS proje
 
 ## Contents
 * [GenericUI](#genericui)
-    * [Background](#background)
+    * [Requirements](#requirements)
 * [Components](#components)
     * [Inputs](#inputs)
     * [Forms](#forms)
@@ -25,6 +25,10 @@ GenericUI provides you with beautiful and generic UI elements for your iOS proje
         * [Adding a view to a form](#adding-a-view-to-a-form)
         * [Customizing form element sizes](#customizing-form-element-sizes)
         * [Spacers](#spacers)
+        
+## Requirements
+
+* Swift 3.0+
 
 # Components
 
