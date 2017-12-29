@@ -18,7 +18,7 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
      User this initializer if you have a custom frame you want to use for the input
      @param frame
     */
-    convenience override init(frame: CGRect) {
+    public convenience override init(frame: CGRect) {
         self.init(frame: frame, label: "INPUT")
     }
     
@@ -26,7 +26,7 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
      Use this initializer if you're planning on using autolayout
      @param label (optional)
     */
-    convenience init(label: String = "INPUT") {
+    public convenience init(label: String = "INPUT") {
         self.init(frame: .zero, label: label)
     }
     
@@ -35,7 +35,7 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
      @param frame
      @param label
      */
-    init(frame: CGRect, label: String) {
+    public init(frame: CGRect, label: String) {
         super.init(frame: frame)
         
         setupViews()
@@ -58,7 +58,7 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
     /**
      Text label
     */
-    var label = UILabel(frame: .zero) {
+    open var label = UILabel(frame: .zero) {
         didSet {
             label.removeConstraints(label.constraints)
             setupLabelConstraints()
@@ -69,7 +69,7 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
     /**
      Width for the indicator
     */
-    var indicatorWidth: CGFloat = UIActiveInput.defaultIndicatorWidth {
+    open var indicatorWidth: CGFloat = UIActiveInput.defaultIndicatorWidth {
         didSet {
             activeIndicatorView.removeConstraints(activeIndicatorView.constraints)
             setupIndicatorConstraints()
@@ -79,7 +79,7 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
     /**
      Color for the indicator
     */
-    var activeColor: UIColor = UIActiveInput.defaultIndicatorColor {
+    open var activeColor: UIColor = UIActiveInput.defaultIndicatorColor {
         didSet {
             activeIndicatorView.backgroundColor = activeColor
         }
@@ -88,7 +88,7 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
     /**
      Background color for the text field
      */
-    var inputColor: UIColor = UIActiveInput.defaultInputBackgroundColor {
+    open var inputColor: UIColor = UIActiveInput.defaultInputBackgroundColor {
         didSet {
             inputField.backgroundColor = inputColor
         }
@@ -97,12 +97,12 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
     /**
      Text Field delegate
     */
-    var delegate: UITextFieldDelegate?
+    open var delegate: UITextFieldDelegate?
     
     /**
      This forces a width on the label for the input. This is used for when we have multiple inputs with different label lengths and we want all inputs to be perfectly aligned.
     */
-    var forcedLabelWidth: CGFloat? {
+    open var forcedLabelWidth: CGFloat? {
         didSet {
             label.removeConstraints(label.constraints)
             setupLabelConstraints()
@@ -225,16 +225,19 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
         get { return inputField.accessibilityLabel }
     }
     
+    @available(iOS 11, *)
     override open var accessibilityAttributedHint: NSAttributedString? {
         set { inputField.accessibilityAttributedHint = newValue }
         get { return inputField.accessibilityAttributedHint }
     }
     
+    @available(iOS 11, *)
     override open var accessibilityAttributedValue: NSAttributedString? {
         set { inputField.accessibilityAttributedValue = newValue }
         get { return inputField.accessibilityAttributedValue }
     }
     
+    @available(iOS 11, *)
     override open var accessibilityAttributedLabel: NSAttributedString? {
         set { inputField.accessibilityAttributedLabel = newValue }
         get { return inputField.accessibilityAttributedLabel }
@@ -245,6 +248,7 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
         get { return inputField.accessibilityLanguage }
     }
     
+    @available(iOS 11, *)
     override open var accessibilityContainerType: UIAccessibilityContainerType {
         set { inputField.accessibilityContainerType = newValue }
         get { return inputField.accessibilityContainerType }
@@ -265,7 +269,7 @@ extension UIActiveInput {
     /**
      Returns the text field's output in the generic type specified for the input
      */
-    var output: OutputType? {
+    open var output: OutputType? {
         get {
             return inputField.output
         }
@@ -277,7 +281,7 @@ extension UIActiveInput {
     /**
      Gets or sets the text for the text field
      */
-    var text: String? {
+    open var text: String? {
         get {
             return inputField.text
         }
@@ -289,7 +293,7 @@ extension UIActiveInput {
     /**
      Gets or sets the placeholder for the text field
      */
-    var placeholder: String? {
+    open var placeholder: String? {
         get {
             return inputField.placeholder
         }
@@ -301,7 +305,7 @@ extension UIActiveInput {
     /**
      Gets or sets the font of the text field
     */
-    var font: UIFont? {
+    open var font: UIFont? {
         get {
             return inputField.font
         }
@@ -313,7 +317,7 @@ extension UIActiveInput {
     /**
      Gets or sets the text color for the text field
     */
-    var textColor: UIColor? {
+    open var textColor: UIColor? {
         get {
             return inputField.textColor
         }
@@ -325,14 +329,14 @@ extension UIActiveInput {
     /**
      Returns the CALayer for the text field
     */
-    var inputLayer: CALayer {
+    open var inputLayer: CALayer {
         return inputField.layer
     }
     
     /**
      Gets or sets the keyboardType for the text field
     */
-    var keyboardType: UIKeyboardType {
+    open var keyboardType: UIKeyboardType {
         get {
             return inputField.keyboardType
         }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GenericUI
 
 fileprivate class Person {
     var firstname = ""

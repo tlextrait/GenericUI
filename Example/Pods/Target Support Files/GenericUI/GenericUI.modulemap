@@ -1,0 +1,6 @@
+framework module GenericUI {
+  umbrella header "GenericUI-umbrella.h"
+
+  export *
+  module * { export * }
+}

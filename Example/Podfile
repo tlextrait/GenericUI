@@ -1,0 +1,13 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '10.0'
+use_frameworks!
+
+target 'GenericUI_Example' do
+
+  pod 'GenericUI', :path => '../'
+
+  target 'GenericUI_Tests' do
+    inherit! :search_paths
+
+  end
+end

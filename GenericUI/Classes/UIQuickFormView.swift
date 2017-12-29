@@ -34,11 +34,11 @@ open class UIQuickFormView<OutputModel> : UIView {
     var viewHorizontalSpacing: CGFloat = 5.0
     var defaultSpacerHeight: CGFloat = 10.0
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
-    convenience init() {
+    public convenience init() {
         self.init(frame: .zero)
     }
     
@@ -49,7 +49,7 @@ open class UIQuickFormView<OutputModel> : UIView {
     /**
      Binds an input to a setter, allowing the form to build the output model
      */
-    func bind<Field : UIView>(input: Field, binding: @escaping (inout OutputModel, Field)->Void) -> UUID {
+    open func bind<Field : UIView>(input: Field, binding: @escaping (inout OutputModel, Field)->Void) -> UUID {
         let formBind = UIQuickFormBinding(input: input, binding: binding)
         bindingIndex[formBind.identifier] = formBind
         return formBind.identifier
@@ -58,7 +58,7 @@ open class UIQuickFormView<OutputModel> : UIView {
     /**
      Binds a view
      */
-    func bind(view: UIView) -> UUID {
+    open func bind(view: UIView) -> UUID {
         let binding = UIQuickFormBinding<UIView, OutputModel>(view: view)
         bindingIndex[binding.identifier] = binding
         return binding.identifier
@@ -67,7 +67,7 @@ open class UIQuickFormView<OutputModel> : UIView {
     /**
      Adds a row of views to the form, by their identifiers
      */
-    func addRow(_ elements: [FormElement]) {
+    open func addRow(_ elements: [FormElement]) {
         for el in elements {
             assert(el.isSpacer || hasBinding(for: el), "Tried to add an input that has no binding")
         }
@@ -81,7 +81,7 @@ open class UIQuickFormView<OutputModel> : UIView {
     /**
      Resolves the output for this form by asking all its inputs to resolve their values
      */
-    func resolve(model: inout OutputModel) -> OutputModel {
+    open func resolve(model: inout OutputModel) -> OutputModel {
         for row in viewsAndInputs {
             
             let rowInputs = row.filter({ (el: FormElement) -> Bool in
@@ -125,17 +125,17 @@ open class UIQuickFormView<OutputModel> : UIView {
 
 extension UIQuickFormView {
     
-    func setRecommendedContentPriorities() {
+    open func setRecommendedContentPriorities() {
         setRecommendedContentCompressionPriorities()
         setRecommendedContentHuggingPriorities()
     }
     
-    func setRecommendedContentCompressionPriorities() {
+    open func setRecommendedContentCompressionPriorities() {
         setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
     
-    func setRecommendedContentHuggingPriorities() {
+    open func setRecommendedContentHuggingPriorities() {
         setContentHuggingPriority(.defaultHigh, for: .horizontal)
         setContentHuggingPriority(.defaultLow, for: .vertical)
     }
@@ -143,7 +143,7 @@ extension UIQuickFormView {
     /**
      This effectively builds the UI. Do not call this to refresh the UI as it is destructive.
     */
-    func build() {
+    open func build() {
         // Remove everything from the view to start over if necessary
         if !subviews.isEmpty {
             for view in subviews {
@@ -238,7 +238,7 @@ extension UIQuickFormView {
     /**
      Maps all the bindings and form elements into appropriate views, ordered by row. Detects spacers and converts them to UIView
     */
-    var mappedViews: [[ViewSize]] {
+    open var mappedViews: [[ViewSize]] {
         return viewsAndInputs.map { (farray: [FormElement]) -> [ViewSize] in
             return farray.map({ (f: FormElement) -> ViewSize in
                 var view = UIView()
@@ -255,7 +255,7 @@ extension UIQuickFormView {
         }
     }
     
-    struct ViewSize {
+    public struct ViewSize {
         var size: UInt
         var view: UIView
         var isSpacer: Bool
@@ -277,7 +277,7 @@ public struct FormElement {
     var identifier: UUID?
     var size: UInt
     
-    init(_ identifier: UUID, size: UInt = 1) {
+    public init(_ identifier: UUID, size: UInt = 1) {
         assert(size > 0, "Size should be greater than 0")
         self.identifier = identifier
         self.size = size
@@ -288,11 +288,11 @@ public struct FormElement {
         self.size = size
     }
     
-    static func spacer(size: UInt) -> FormElement {
+    public static func spacer(size: UInt) -> FormElement {
         return FormElement(size: size)
     }
     
-    var isSpacer: Bool {
+    public var isSpacer: Bool {
         return identifier == nil
     }
 }
