@@ -13,6 +13,7 @@ install:
 script:
   - set -o pipefail
   - xcodebuild -version
+  - xcodebuild -showsdks
   - xcodebuild
     -workspace Example/${POD_NAME}.xcworkspace
     -scheme ${POD_NAME}_Example
