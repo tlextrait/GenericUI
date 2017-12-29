@@ -1,0 +1,5 @@
+# macOS
+*.DSStore
+
+# Xcode
+*.xcuserdatad
