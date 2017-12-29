@@ -2,6 +2,11 @@
 
 #  GenericUI
 
+[![CI Status](http://img.shields.io/travis/tlextrait/GenericUI.svg?style=flat)](https://travis-ci.org/tlextrait/GenericUI)
+[![Version](https://img.shields.io/cocoapods/v/GenericUI.svg?style=flat)](http://cocoapods.org/pods/GenericUI)
+[![License](https://img.shields.io/cocoapods/l/GenericUI.svg?style=flat)](http://cocoapods.org/pods/GenericUI)
+[![Platform](https://img.shields.io/cocoapods/p/GenericUI.svg?style=flat)](http://cocoapods.org/pods/GenericUI)
+
 GenericUI provides you with beautiful and generic UI elements for your iOS projects. For now it just focuses on inputs and forms but there's a lot more to come.
 
 ## Contents
