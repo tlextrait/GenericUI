@@ -30,7 +30,7 @@
 /* Begin PBXFileReference section */
 		E909B6771FEED87F006ECAC1 /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
 		E909B6781FF3249F006ECAC1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		E9C185E51FE9BF1E00857300 /* FormView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FormView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9C185E51FE9BF1E00857300 /* GenericUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9C185E81FE9BF1E00857300 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9C185EA1FE9BF1E00857300 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E9C185EF1FE9BF1E00857300 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -39,7 +39,7 @@
 		E9C185FE1FE9CA4C00857300 /* UIInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIInputField.swift; sourceTree = "<group>"; };
 		E9C186001FE9CC8B00857300 /* StringTwoWayConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTwoWayConvertible.swift; sourceTree = "<group>"; };
 		E9C186021FE9D8F500857300 /* UIActiveInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIActiveInput.swift; sourceTree = "<group>"; };
-		E9C186081FEDD09600857300 /* FormViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FormViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9C186081FEDD09600857300 /* GenericUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9C1860A1FEDD09600857300 /* FormViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewTests.swift; sourceTree = "<group>"; };
 		E9C1860C1FEDD09600857300 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,8 +65,8 @@
 		E9C185DC1FE9BF1E00857300 = {
 			isa = PBXGroup;
 			children = (
-				E9C185E71FE9BF1E00857300 /* FormView */,
-				E9C186091FEDD09600857300 /* FormViewTests */,
+				E9C185E71FE9BF1E00857300 /* GenericUI */,
+				E9C186091FEDD09600857300 /* GenericUITests */,
 				E9C185E61FE9BF1E00857300 /* Products */,
 				E909B6781FF3249F006ECAC1 /* README.md */,
 			);
@@ -75,23 +75,23 @@
 		E9C185E61FE9BF1E00857300 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E9C185E51FE9BF1E00857300 /* FormView.app */,
-				E9C186081FEDD09600857300 /* FormViewTests.xctest */,
+				E9C185E51FE9BF1E00857300 /* GenericUI.app */,
+				E9C186081FEDD09600857300 /* GenericUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E9C185E71FE9BF1E00857300 /* FormView */ = {
+		E9C185E71FE9BF1E00857300 /* GenericUI */ = {
 			isa = PBXGroup;
 			children = (
 				E9C185E81FE9BF1E00857300 /* AppDelegate.swift */,
 				E9C185EF1FE9BF1E00857300 /* Assets.xcassets */,
-				E9C185FB1FE9BFAB00857300 /* FormView */,
+				E9C185FB1FE9BFAB00857300 /* GenericUI */,
 				E9C185F41FE9BF1E00857300 /* Info.plist */,
 				E9C185FA1FE9BF4100857300 /* View Controllers */,
 				E909B6771FEED87F006ECAC1 /* Notes.md */,
 			);
-			path = FormView;
+			path = GenericUI;
 			sourceTree = "<group>";
 		};
 		E9C185FA1FE9BF4100857300 /* View Controllers */ = {
@@ -102,7 +102,7 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
-		E9C185FB1FE9BFAB00857300 /* FormView */ = {
+		E9C185FB1FE9BFAB00857300 /* GenericUI */ = {
 			isa = PBXGroup;
 			children = (
 				E9C186001FE9CC8B00857300 /* StringTwoWayConvertible.swift */,
@@ -110,24 +110,24 @@
 				E9C185FE1FE9CA4C00857300 /* UIInputField.swift */,
 				E9C185FC1FE9C4C800857300 /* UIQuickFormView.swift */,
 			);
-			path = FormView;
+			path = GenericUI;
 			sourceTree = "<group>";
 		};
-		E9C186091FEDD09600857300 /* FormViewTests */ = {
+		E9C186091FEDD09600857300 /* GenericUITests */ = {
 			isa = PBXGroup;
 			children = (
 				E9C1860A1FEDD09600857300 /* FormViewTests.swift */,
 				E9C1860C1FEDD09600857300 /* Info.plist */,
 			);
-			path = FormViewTests;
+			path = GenericUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E9C185E41FE9BF1E00857300 /* FormView */ = {
+		E9C185E41FE9BF1E00857300 /* GenericUI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E9C185F71FE9BF1E00857300 /* Build configuration list for PBXNativeTarget "FormView" */;
+			buildConfigurationList = E9C185F71FE9BF1E00857300 /* Build configuration list for PBXNativeTarget "GenericUI" */;
 			buildPhases = (
 				E9C185E11FE9BF1E00857300 /* Sources */,
 				E9C185E21FE9BF1E00857300 /* Frameworks */,
@@ -137,14 +137,14 @@
 			);
 			dependencies = (
 			);
-			name = FormView;
+			name = GenericUI;
 			productName = FormView;
-			productReference = E9C185E51FE9BF1E00857300 /* FormView.app */;
+			productReference = E9C185E51FE9BF1E00857300 /* GenericUI.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E9C186071FEDD09600857300 /* FormViewTests */ = {
+		E9C186071FEDD09600857300 /* GenericUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E9C1860F1FEDD09600857300 /* Build configuration list for PBXNativeTarget "FormViewTests" */;
+			buildConfigurationList = E9C1860F1FEDD09600857300 /* Build configuration list for PBXNativeTarget "GenericUITests" */;
 			buildPhases = (
 				E9C186041FEDD09600857300 /* Sources */,
 				E9C186051FEDD09600857300 /* Frameworks */,
@@ -155,9 +155,9 @@
 			dependencies = (
 				E9C1860E1FEDD09600857300 /* PBXTargetDependency */,
 			);
-			name = FormViewTests;
+			name = GenericUITests;
 			productName = FormViewTests;
-			productReference = E9C186081FEDD09600857300 /* FormViewTests.xctest */;
+			productReference = E9C186081FEDD09600857300 /* GenericUITests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -181,7 +181,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E9C185E01FE9BF1E00857300 /* Build configuration list for PBXProject "FormView" */;
+			buildConfigurationList = E9C185E01FE9BF1E00857300 /* Build configuration list for PBXProject "GenericUI" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -194,8 +194,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E9C185E41FE9BF1E00857300 /* FormView */,
-				E9C186071FEDD09600857300 /* FormViewTests */,
+				E9C185E41FE9BF1E00857300 /* GenericUI */,
+				E9C186071FEDD09600857300 /* GenericUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -245,7 +245,7 @@
 /* Begin PBXTargetDependency section */
 		E9C1860E1FEDD09600857300 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E9C185E41FE9BF1E00857300 /* FormView */;
+			target = E9C185E41FE9BF1E00857300 /* GenericUI */;
 			targetProxy = E9C1860D1FEDD09600857300 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -364,9 +364,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RRWZ6M66CZ;
-				INFOPLIST_FILE = FormView/Info.plist;
+				INFOPLIST_FILE = GenericUI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yelp.FormView;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tlextrait.GenericUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -379,9 +379,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RRWZ6M66CZ;
-				INFOPLIST_FILE = FormView/Info.plist;
+				INFOPLIST_FILE = GenericUI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yelp.FormView;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tlextrait.GenericUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -394,9 +394,9 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RRWZ6M66CZ;
-				INFOPLIST_FILE = FormViewTests/Info.plist;
+				INFOPLIST_FILE = GenericUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yelp.FormViewTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tlextrait.GenericUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -410,9 +410,9 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RRWZ6M66CZ;
-				INFOPLIST_FILE = FormViewTests/Info.plist;
+				INFOPLIST_FILE = GenericUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yelp.FormViewTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tlextrait.GenericUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -423,7 +423,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E9C185E01FE9BF1E00857300 /* Build configuration list for PBXProject "FormView" */ = {
+		E9C185E01FE9BF1E00857300 /* Build configuration list for PBXProject "GenericUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E9C185F51FE9BF1E00857300 /* Debug */,
@@ -432,7 +432,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E9C185F71FE9BF1E00857300 /* Build configuration list for PBXNativeTarget "FormView" */ = {
+		E9C185F71FE9BF1E00857300 /* Build configuration list for PBXNativeTarget "GenericUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E9C185F81FE9BF1E00857300 /* Debug */,
@@ -441,7 +441,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E9C1860F1FEDD09600857300 /* Build configuration list for PBXNativeTarget "FormViewTests" */ = {
+		E9C1860F1FEDD09600857300 /* Build configuration list for PBXNativeTarget "GenericUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E9C186101FEDD09600857300 /* Debug */,
