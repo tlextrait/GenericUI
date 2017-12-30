@@ -31,6 +31,7 @@ GenericUI provides you with beautiful and generic UI elements for your iOS proje
         * [Adding a view to a form](#adding-a-view-to-a-form)
         * [Customizing form element sizes](#customizing-form-element-sizes)
         * [Spacers](#spacers)
+* [Upcoming](#upcoming)
         
 ## Requirements
 
@@ -303,3 +304,8 @@ form.addRow([FormElement(input, size: 2), FormElement(view, size: 1), ...])
 ```swift
 form.addRow([FormElement.makeSpacer(size: 3), FormElement(view, size: 1), ...])
 ```
+
+# Upcoming
+
+* At this time it is not possible to know if there are input errors until form resolution. A feature that tells the calling code if there is an error as inputs are changed is coming soon.
+
