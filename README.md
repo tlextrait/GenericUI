@@ -34,6 +34,7 @@ GenericUI provides you with beautiful and generic UI elements for your iOS proje
 ## Requirements
 
 * Swift 3.0+
+* iOS 9.0+
 
 # Components
 

@@ -28,7 +28,6 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-        
     }
     
     private func setupViews() {
@@ -74,34 +73,26 @@ class ViewController: UIViewController {
         
         let fieldFirstname = UIActiveInput<String>(label: "FIRST NAME")
         let idFirstname = userForm.bind(input: fieldFirstname) { (person, input) in
-            guard let firstname = input.output else {
-                return
-            }
-            person.firstname = firstname
+            person.firstname = input.output ?? ""
+            return (true, nil)
         }
         
         let fieldLastname = UIActiveInput<String>(label: "LAST NAME")
         let idLastname = userForm.bind(input: fieldLastname) { (person, input) in
-            guard let lastname = input.output else {
-                return
-            }
-            person.lastname = lastname
+            person.lastname = input.output ?? ""
+            return (true, nil)
         }
         
         let fieldAddress = UIActiveInput<String>(label: "ADDRESS")
         let idAddress = userForm.bind(input: fieldAddress) { (person, input) in
-            guard let address = input.output else {
-                return
-            }
-            person.address = address
+            person.address = input.output ?? ""
+            return (true, nil)
         }
         
         let ageField = UIActiveInput<UInt>(label: "AGE")
         let idAge = userForm.bind(input: ageField) { (person, input) in
-            guard let age = input.output else {
-                return
-            }
-            person.age = age
+            person.age = input.output ?? 0
+            return (true, nil)
         }
         
         let userFormTitle = UILabel(frame: .zero)
@@ -155,18 +146,12 @@ class ViewController: UIViewController {
         
         // Bind the inputs
         let widthInputId = form.bind(input: widthInput) { (size: inout CGSize, input: UIActiveInput<CGFloat>) in
-            guard let width = input.output else {
-                // handle any errors here
-                return
-            }
-            size.width = width
+            size.width = input.output ?? 0.0
+            return (true, nil)
         }
         let heightInputId = form.bind(input: heightInput) { (size: inout CGSize, input: UIActiveInput<CGFloat>) in
-            guard let height = input.output else {
-                // handle any errors here
-                return
-            }
-            size.height = height
+            size.height = input.output ?? 0.0
+            return (true, nil)
         }
         
         // Lay out the inputs in the form (both inputs go on the same line here)
@@ -175,8 +160,8 @@ class ViewController: UIViewController {
         form.build()
         
         // When you want to resolve the form to a CGSize:
-        var s = CGSize(width: 0, height: 0)
-        let size = form.resolve(model: &s)
+        var size = CGSize(width: 0, height: 0)
+        let _ = form.resolve(model: &size)
     }
     
     @objc func doneTapped() {

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GenericUI'
-  s.version          = '0.1.1'
+  s.version          = '0.2.0'
   s.summary          = 'Generic UI provides you with beautiful and generic UI components for your iOS projects.'
 
 # This description is used to generate tags and improve search results.
@@ -26,7 +26,7 @@ GenericUI provides you with beautiful and generic UI elements for your iOS proje
   s.author           = { 'tlextrait' => 'thomas.lextrait@gmail.com' }
   s.source           = { :git => 'https://github.com/tlextrait/GenericUI.git', :tag => s.version.to_s }
   
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '9.0'
 
   s.source_files = 'GenericUI/Classes/*'
   s.frameworks = 'UIKit'

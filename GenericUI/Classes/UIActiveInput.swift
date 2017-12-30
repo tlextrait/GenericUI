@@ -185,6 +185,7 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
         delegate?.textFieldDidEndEditing?(textField)
     }
     
+    @available(iOS 10, *)
     public func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
         
         // Custom logic

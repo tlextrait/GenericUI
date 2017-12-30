@@ -49,7 +49,7 @@ open class UIQuickFormView<OutputModel> : UIView {
     /**
      Binds an input to a setter, allowing the form to build the output model
      */
-    open func bind<Field : UIView>(input: Field, binding: @escaping (inout OutputModel, Field)->Void) -> UUID {
+    open func bind<Field : UIView>(input: Field, binding: @escaping (inout OutputModel, Field)->(Bool, Error?)) -> UUID {
         let formBind = UIQuickFormBinding(input: input, binding: binding)
         bindingIndex[formBind.identifier] = formBind
         return formBind.identifier
@@ -81,7 +81,11 @@ open class UIQuickFormView<OutputModel> : UIView {
     /**
      Resolves the output for this form by asking all its inputs to resolve their values
      */
-    open func resolve(model: inout OutputModel) -> OutputModel {
+    open func resolve(model: inout OutputModel) -> (Bool, [Error]) {
+        
+        var errors = [Error]()
+        var success = true
+        
         for row in viewsAndInputs {
             
             let rowInputs = row.filter({ (el: FormElement) -> Bool in
@@ -96,11 +100,18 @@ open class UIQuickFormView<OutputModel> : UIView {
             })
             
             for input in rowInputs {
-                input.resolve(&model)
+                let successError = input.resolve(&model)
+                if !successError.0 {
+                    success = false
+                }
+                if let err = successError.1 {
+                    errors.append(err)
+                }
             }
             
         }
-        return model
+        
+        return (success, errors)
     }
     
     private func hasBinding(for element: FormElement) -> Bool {
@@ -297,13 +308,17 @@ public struct FormElement {
     }
 }
 
+public enum UIQuickFormError : Error {
+    case bindingNotFound
+}
+
 //
 // MARK: Private API
 //
 
 fileprivate protocol ResolvableBinding: class {
     associatedtype ModelType
-    func resolve(_ model: inout ModelType)
+    func resolve(_ model: inout ModelType) -> (Bool, Error?)
     var isInput: Bool { get }
     var view: UIView { get }
 }
@@ -327,7 +342,7 @@ fileprivate class AbstractGenericFormBinding<OutputModelType> : ResolvableBindin
         fatalError("Abstract getter")
     }
     
-    func resolve(_ model: inout AbstractGenericFormBinding<ModelType>.ModelType) {
+    func resolve(_ model: inout AbstractGenericFormBinding<ModelType>.ModelType) -> (Bool, Error?) {
         // abstract
         fatalError("Abstract method")
     }
@@ -339,7 +354,7 @@ fileprivate class AbstractGenericFormBinding<OutputModelType> : ResolvableBindin
 fileprivate class UIQuickFormBinding<InputType : UIView, ModelType> : AbstractGenericFormBinding<ModelType> {
     var viewElement: UIView?
     var input: InputType?
-    var binding: ((inout ModelType, InputType)->Void)?
+    var binding: ((inout ModelType, InputType)->(Bool, Error?))?
     let identifier = UUID()
     
     override var view: UIView {
@@ -355,18 +370,18 @@ fileprivate class UIQuickFormBinding<InputType : UIView, ModelType> : AbstractGe
         self.viewElement = view
     }
     
-    convenience init(input: InputType, binding: @escaping (inout ModelType, InputType)->Void) {
+    convenience init(input: InputType, binding: @escaping (inout ModelType, InputType)->(Bool, Error?)) {
         self.init() // may call the abstract initializer if 'self' is believed to be a AbstractGenericFormBinding
         self.input = input
         self.binding = binding
     }
     
-    override func resolve(_ model: inout ModelType) {
+    override func resolve(_ model: inout ModelType) -> (Bool, Error?) {
         guard let b = binding,
             let i = input else {
             assert(false, "Failed to find the input for a binding")
-            return
+            return (false, UIQuickFormError.bindingNotFound)
         }
-        b(&model, i)
+        return b(&model, i)
     }
 }
