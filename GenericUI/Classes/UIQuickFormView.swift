@@ -48,6 +48,8 @@ open class UIQuickFormView<OutputModel> : UIView {
     
     /**
      Binds an input to a setter, allowing the form to build the output model
+     @param input: UIView
+     @param binding callback that takes a model and input, returns a boolean indicating success and an error if applicable
      */
     open func bind<Field : UIView>(input: Field, binding: @escaping (inout OutputModel, Field)->(Bool, Error?)) -> UUID {
         let formBind = UIQuickFormBinding(input: input, binding: binding)
@@ -57,6 +59,7 @@ open class UIQuickFormView<OutputModel> : UIView {
     
     /**
      Binds a view
+     @param UIView
      */
     open func bind(view: UIView) -> UUID {
         let binding = UIQuickFormBinding<UIView, OutputModel>(view: view)
@@ -66,6 +69,7 @@ open class UIQuickFormView<OutputModel> : UIView {
     
     /**
      Adds a row of views to the form, by their identifiers
+     @param array of FormElement
      */
     open func addRow(_ elements: [FormElement]) {
         for el in elements {
@@ -80,6 +84,8 @@ open class UIQuickFormView<OutputModel> : UIView {
     
     /**
      Resolves the output for this form by asking all its inputs to resolve their values
+     @param OutputModel: model ready to be filled out with the form inputs
+     @return (Bool, [Error]): tuple with a boolean indicating success and an error of any errors occurred
      */
     open func resolve(model: inout OutputModel) -> (Bool, [Error]) {
         

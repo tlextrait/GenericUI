@@ -26,6 +26,7 @@ GenericUI provides you with beautiful and generic UI elements for your iOS proje
         * [Accessibility](#accessibility)
     * [A Simple Form](#a-simple-form)
         * [Form for CGSize](#form-for-cgsize)
+        * [Handling Errors](#handling-errors)
         * [Adding a native input to a form](#adding-a-native-input-to-a-form)
         * [Adding a view to a form](#adding-a-view-to-a-form)
         * [Customizing form element sizes](#customizing-form-element-sizes)
@@ -195,16 +196,18 @@ class ViewController : UIViewController {
         let widthInputId = form.bind(input: widthInput) { (size: inout CGSize, input: UIActiveInput<CGFloat>) in
             guard let width = input.output else {
                 // handle any errors here
-                return
+                return (false, nil)
             }
             size.width = width
+            return (true, nil)
         }
         let heightInputId = form.bind(input: heightInput) { (size: inout CGSize, input: UIActiveInput<CGFloat>) in
             guard let height = input.output else {
                 // handle any errors here
-                return
+                return (false, nil)
             }
             size.height = height
+            return (true, nil)
         }
 
         // Lay out the inputs in the form (both inputs go on the same line here)
@@ -213,10 +216,42 @@ class ViewController : UIViewController {
         form.build() // sets up autolayout constraints for all the views within the form
 
         // When you want to resolve the form to a CGSize:
-        var s = CGSize(width: 0, height: 0)
-        let size = form.resolve(model: &s)
+        var size = CGSize(width: 0, height: 0)
+        let success = form.resolve(model: &size)    // returns a tuple (Bool, [Error])
     }
     
+}
+```
+
+### Handling Errors
+
+Create your own error types for handling bad user input. Error handling is done at the binding.
+When the form is resolved you can obtain an array of all the errors.
+
+```swift
+enum PersonError : Error {
+    case tooOld, nilInput
+}
+...
+let ageId = form.bind(input: ageInput) { (person, input) in
+    guard let age = input.output else {
+        return (false, PersonError.nilInput)
+    }
+    if age > 120 {
+        return (false, PersonError.tooOld)
+    }
+    person.age = age
+    return (true, nil)
+}
+...
+let success = form.resolve(model: &person)
+// success is a tuple (Bool, [Error])
+if success.0 {
+    // everything looks good!
+} else {
+    for error in success.1 {
+        ...
+    }
 }
 ```
 
