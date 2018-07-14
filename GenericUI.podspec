@@ -31,11 +31,4 @@ GenericUI provides you with beautiful and generic UI elements for your iOS proje
   s.source_files = 'GenericUI/Classes/*'
   s.frameworks = 'UIKit'
   
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-  # s.resource_bundles = {
-  #   'MyLib' => ['MyLib/Assets/*.png']
-  # }
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end

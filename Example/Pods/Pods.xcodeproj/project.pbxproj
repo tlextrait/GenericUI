@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -34,14 +34,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0A1B1F6A07F93DA911377052FA7ECF8B /* Pods_GenericUI_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_GenericUI_Tests.framework; path = "Pods-GenericUI_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A1B1F6A07F93DA911377052FA7ECF8B /* Pods_GenericUI_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GenericUI_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F2647C13629C46C47B9E42E569BBF42 /* Pods-GenericUI_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-GenericUI_Tests-umbrella.h"; sourceTree = "<group>"; };
-		0FA18BB41C2E6D3EF98FCF294BF2C234 /* Pods_GenericUI_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_GenericUI_Example.framework; path = "Pods-GenericUI_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0FA18BB41C2E6D3EF98FCF294BF2C234 /* Pods_GenericUI_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GenericUI_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FF5743D0DF9FA31CD382800E8816FC5 /* Pods-GenericUI_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-GenericUI_Example-umbrella.h"; sourceTree = "<group>"; };
 		1C49F699A6DEAB8597C5F4854655038C /* UIInputField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIInputField.swift; path = GenericUI/Classes/UIInputField.swift; sourceTree = "<group>"; };
 		25A5E9575F817DAA462A0FBA7FE5D3A0 /* Pods-GenericUI_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GenericUI_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		2B85FB1BF1125E3A487C8D919A9A4AC1 /* Pods-GenericUI_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GenericUI_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		4B173795719480A7CF51D826A7805F6B /* Pods-GenericUI_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-GenericUI_Tests.modulemap"; sourceTree = "<group>"; };
+		4B173795719480A7CF51D826A7805F6B /* Pods-GenericUI_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-GenericUI_Tests.modulemap"; sourceTree = "<group>"; };
 		5E88AF98F12F9534AF1949D625A633A6 /* Pods-GenericUI_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GenericUI_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		67C957C3C58AADFDA4A78F9F0D40C033 /* UIActiveInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIActiveInput.swift; path = GenericUI/Classes/UIActiveInput.swift; sourceTree = "<group>"; };
 		718DA7CA574919AAF39B2F66061BDAC3 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,24 +49,27 @@
 		8A2E8496982F54E284FBED6427139715 /* Pods-GenericUI_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GenericUI_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		8E08A7DBF8D4E39540EC6F9C6CDC40B1 /* GenericUI.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GenericUI.xcconfig; sourceTree = "<group>"; };
 		906DA371860756089D64467507023405 /* Pods-GenericUI_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GenericUI_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		941537D3B688CA53F4F2D09BE2F2BB7F /* Pods-GenericUI_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-GenericUI_Example-resources.sh"; sourceTree = "<group>"; };
-		9685C351144BCDDDB5F117882B3D6628 /* GenericUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = GenericUI.framework; path = GenericUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9685C351144BCDDDB5F117882B3D6628 /* GenericUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GenericUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		97FEE3BDD1C76C772BF6D94A19E165DF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		991AB5B7E62FA143E34DDAFF00E986E9 /* UIQuickFormView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIQuickFormView.swift; path = GenericUI/Classes/UIQuickFormView.swift; sourceTree = "<group>"; };
 		9B548806B0F36343CCA5020136086CA5 /* GenericUI-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GenericUI-umbrella.h"; sourceTree = "<group>"; };
 		9E3182DE78F06826F6810F11059DC0F7 /* Pods-GenericUI_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GenericUI_Example.release.xcconfig"; sourceTree = "<group>"; };
 		AA5FE864DD579ACDFADBE974BAE1274A /* Pods-GenericUI_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GenericUI_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		B2B1BCDF1AD086A5BCEB99458AC4CC86 /* Pods-GenericUI_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-GenericUI_Example.modulemap"; sourceTree = "<group>"; };
+		B2B1BCDF1AD086A5BCEB99458AC4CC86 /* Pods-GenericUI_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-GenericUI_Example.modulemap"; sourceTree = "<group>"; };
 		B63C6A64CF66340668996F78DA6BB482 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		BA586781F033435283FB09694EB0EC78 /* Pods-GenericUI_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GenericUI_Example-dummy.m"; sourceTree = "<group>"; };
 		BB03C5015F0B86C8DEE46DAF71F4E4AA /* Pods-GenericUI_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-GenericUI_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		CA581790E9ACA098BC5EE531D1FC339A /* Pods-GenericUI_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-GenericUI_Tests-resources.sh"; sourceTree = "<group>"; };
 		CC3B208F327C76FBCCA200169405B8F5 /* Pods-GenericUI_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GenericUI_Tests-dummy.m"; sourceTree = "<group>"; };
 		CD10F26FCBDC86E80243478B23B2540C /* Pods-GenericUI_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GenericUI_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		D0B6F0492568042140C1A26EDB5C064E /* GenericUI.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = GenericUI.modulemap; sourceTree = "<group>"; };
+		D0B6F0492568042140C1A26EDB5C064E /* GenericUI.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = GenericUI.modulemap; sourceTree = "<group>"; };
 		D88AAE1F92055A60CC2FC970D7D34634 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		E0CA98B8E214CAADB6CF448CA8D4D90E /* StringTwoWayConvertible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StringTwoWayConvertible.swift; path = GenericUI/Classes/StringTwoWayConvertible.swift; sourceTree = "<group>"; };
+		E9376A7620FA9E6F00540514 /* GenericUI.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = GenericUI.podspec; path = ../GenericUI.podspec; sourceTree = "<group>"; };
+		E9376A7720FA9E7600540514 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		E9376A7820FA9E7700540514 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		EE9C8C4B1F16E2E168EB7B0B9D60B193 /* GenericUI-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GenericUI-dummy.m"; sourceTree = "<group>"; };
 		F47B7F4876ACD2067A9A1B552555185B /* Pods-GenericUI_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-GenericUI_Example-frameworks.sh"; sourceTree = "<group>"; };
 		FCB437D3D984B1F248E0349B0B880376 /* GenericUI-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GenericUI-prefix.pch"; sourceTree = "<group>"; };
@@ -104,6 +107,7 @@
 		0D255D7AD9959A9CEB86F300CA2B6118 /* GenericUI */ = {
 			isa = PBXGroup;
 			children = (
+				E9376A7520FA9E4600540514 /* Pod */,
 				E0CA98B8E214CAADB6CF448CA8D4D90E /* StringTwoWayConvertible.swift */,
 				67C957C3C58AADFDA4A78F9F0D40C033 /* UIActiveInput.swift */,
 				1C49F699A6DEAB8597C5F4854655038C /* UIInputField.swift */,
@@ -217,6 +221,16 @@
 				0A1B1F6A07F93DA911377052FA7ECF8B /* Pods_GenericUI_Tests.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E9376A7520FA9E4600540514 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				E9376A7620FA9E6F00540514 /* GenericUI.podspec */,
+				E9376A7720FA9E7600540514 /* LICENSE */,
+				E9376A7820FA9E7700540514 /* README.md */,
+			);
+			path = Pod;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
