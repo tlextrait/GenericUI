@@ -126,7 +126,7 @@ class ViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.topAnchor.constraint(equalTo: userForm.bottomAnchor, constant: 10.0).isActive = true
         button.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
-        button.addTarget(self, action: #selector(self.doneTapped), for: UIControlEvents.allTouchEvents)
+        button.addTarget(self, action: #selector(self.doneTapped), for: UIControl.Event.allTouchEvents)
         
         //
         // CGSize Form

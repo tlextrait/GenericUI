@@ -131,7 +131,7 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
     //
     
     override open var intrinsicContentSize: CGSize {
-        return CGSize(width: UIViewNoIntrinsicMetric, height: totalHeight)
+        return CGSize(width: UIView.noIntrinsicMetric, height: totalHeight)
     }
     
     
@@ -186,7 +186,7 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
     }
     
     @available(iOS 10, *)
-    public func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+    public func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         
         // Custom logic
         hasLostFocus()
