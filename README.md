@@ -4,7 +4,7 @@
 
 [![CI Status](http://img.shields.io/travis/tlextrait/GenericUI.svg?style=flat)](https://travis-ci.org/tlextrait/GenericUI)
 [![Version](https://img.shields.io/cocoapods/v/GenericUI.svg?style=flat)](http://cocoapods.org/pods/GenericUI)
-![Swift](https://img.shields.io/badge/%20in-swift%204.1-orange.svg)
+![Swift](https://img.shields.io/badge/%20in-swift%204.2-orange.svg)
 [![License](https://img.shields.io/cocoapods/l/GenericUI.svg?style=flat)](http://cocoapods.org/pods/GenericUI)
 [![Platform](https://img.shields.io/cocoapods/p/GenericUI.svg?style=flat)](http://cocoapods.org/pods/GenericUI)
 
@@ -36,7 +36,7 @@ GenericUI provides you with beautiful and generic UI elements for your iOS proje
         
 ## Requirements
 
-* Swift 3.0+
+* Swift 4.2
 * iOS 9.0+
 
 # Components
