@@ -1,6 +1,6 @@
 {
   "name": "GenericUI",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "summary": "Generic UI provides you with beautiful and generic UI components for your iOS projects.",
   "description": "GenericUI provides you with beautiful and generic UI elements for your iOS projects. For now it just focuses on inputs and forms but there's a lot more to come.",
   "homepage": "https://github.com/tlextrait/GenericUI",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/tlextrait/GenericUI.git",
-    "tag": "0.2.2"
+    "tag": "0.2.3"
   },
   "platforms": {
     "ios": "9.0"
