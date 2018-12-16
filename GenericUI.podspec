@@ -32,5 +32,6 @@ GenericUI provides you with beautiful and generic UI elements for your iOS proje
   s.frameworks = 'UIKit'
 
   s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.2' }
+  s.swift_version = '4.2'
 
 end
