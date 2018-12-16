@@ -3,7 +3,7 @@
 //  FormViewTests
 //
 //  Created by Thomas Lextrait on 12/22/17.
-//  Copyright © 2017 Yelp. All rights reserved.
+//  Copyright © 2017 LycheeApps. All rights reserved.
 //
 
 import XCTest
