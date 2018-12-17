@@ -1,5 +1,5 @@
 PODS:
-  - GenericUI (0.2.3)
+  - GenericUI (0.2.4)
 
 DEPENDENCIES:
   - GenericUI (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  GenericUI: d8a09ebf8f297cda9bd90eb4198ee0aa6f32dc31
+  GenericUI: f135df613e2a58c36625f8b4b337f0bd4313d44e
 
 PODFILE CHECKSUM: b9df71dca40b12bd3fbc752601285cdf35099fcc
 

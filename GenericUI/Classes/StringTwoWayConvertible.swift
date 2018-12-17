@@ -37,7 +37,6 @@ extension CGFloat : StringTwoWayConvertible {
     }
 }
 extension Float : StringTwoWayConvertible {}
-extension Float80 : StringTwoWayConvertible {}
 extension String : StringTwoWayConvertible {
     public init?(_ text: String) {
         self.init(text as NSString)
@@ -77,10 +76,6 @@ extension CGFloat : BestKeyboardType {
 }
 
 extension Float : BestKeyboardType {
-    public static var bestKeyboardType: UIKeyboardType { return .decimalPad }
-}
-
-extension Float80 : BestKeyboardType {
     public static var bestKeyboardType: UIKeyboardType { return .decimalPad }
 }
 
