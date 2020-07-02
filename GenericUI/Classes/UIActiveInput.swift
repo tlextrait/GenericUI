@@ -3,38 +3,30 @@
 //  FormView
 //
 //  Created by Thomas Lextrait on 12/19/17.
-//  Copyright © 2017 LycheeApps. All rights reserved.
+//  Copyright © 2017-2020 LycheeApps. All rights reserved.
 //
 
 import UIKit
 
-/**
- UIActiveInput is a cool customizable text-based input. Best used in a form with multiple inputs as it displays
- in a user-friendly manner which input is "active"
- */
+/// UIActiveInput is a cool customizable text-based input. Best used in a form with multiple inputs as it displays
+/// in a user-friendly manner which input is "active"
 open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType> : UIView, UITextFieldDelegate {
     
-    /**
-     User this initializer if you have a custom frame you want to use for the input
-     @param frame
-    */
+    /// User this initializer if you have a custom frame you want to use for the input
+    /// - parameter frame
     public convenience override init(frame: CGRect) {
         self.init(frame: frame, label: "INPUT")
     }
     
-    /**
-     Use this initializer if you're planning on using autolayout
-     @param label (optional)
-    */
+    /// Use this initializer if you're planning on using autolayout
+    /// - parameter label (optional)
     public convenience init(label: String = "INPUT") {
         self.init(frame: .zero, label: label)
     }
     
-    /**
-     User this initializer if you have a custom frame you want to use for the input
-     @param frame
-     @param label
-     */
+    /// User this initializer if you have a custom frame you want to use for the input
+    /// - parameter frame
+    /// - parameter label
     public init(frame: CGRect, label: String) {
         super.init(frame: frame)
         
@@ -48,6 +40,12 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
         self.label.text = label
     }
     
+    @available(*, unavailable)
+    init() {
+        fatalError("init() has not been implemented")
+    }
+    
+    @available(*, unavailable)
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -55,9 +53,7 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
     private var inputField = UIInputField<OutputType>(frame: .zero)
     private var activeIndicatorView = UIView(frame: .zero)
     
-    /**
-     Text label
-    */
+    /// Text label
     open var label = UILabel(frame: .zero) {
         didSet {
             label.removeConstraints(label.constraints)
@@ -66,9 +62,7 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
         }
     }
     
-    /**
-     Width for the indicator
-    */
+    /// Width for the indicator
     open var indicatorWidth: CGFloat = UIActiveInput.defaultIndicatorWidth {
         didSet {
             activeIndicatorView.removeConstraints(activeIndicatorView.constraints)
@@ -76,32 +70,25 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
         }
     }
     
-    /**
-     Color for the indicator
-    */
+    /// Color for the indicator
     open var activeColor: UIColor = UIActiveInput.defaultIndicatorColor {
         didSet {
             activeIndicatorView.backgroundColor = activeColor
         }
     }
     
-    /**
-     Background color for the text field
-     */
+    /// Background color for the text field
     open var inputColor: UIColor = UIActiveInput.defaultInputBackgroundColor {
         didSet {
             inputField.backgroundColor = inputColor
         }
     }
     
-    /**
-     Text Field delegate
-    */
+    /// Text Field delegate
     open var delegate: UITextFieldDelegate?
     
-    /**
-     This forces a width on the label for the input. This is used for when we have multiple inputs with different label lengths and we want all inputs to be perfectly aligned.
-    */
+    /// This forces a width on the label for the input. This is used for when we have multiple
+    /// inputs with different label lengths and we want all inputs to be perfectly aligned.
     open var forcedLabelWidth: CGFloat? {
         didSet {
             label.removeConstraints(label.constraints)
@@ -267,9 +254,7 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
 
 extension UIActiveInput {
     
-    /**
-     Returns the text field's output in the generic type specified for the input
-     */
+    /// Returns the text field's output in the generic type specified for the input
     open var output: OutputType? {
         get {
             return inputField.output
@@ -279,9 +264,7 @@ extension UIActiveInput {
         }
     }
     
-    /**
-     Gets or sets the text for the text field
-     */
+    /// Gets or sets the text for the text field
     open var text: String? {
         get {
             return inputField.text
@@ -291,9 +274,7 @@ extension UIActiveInput {
         }
     }
     
-    /**
-     Gets or sets the placeholder for the text field
-     */
+    /// Gets or sets the placeholder for the text field
     open var placeholder: String? {
         get {
             return inputField.placeholder
@@ -303,9 +284,7 @@ extension UIActiveInput {
         }
     }
     
-    /**
-     Gets or sets the font of the text field
-    */
+    /// Gets or sets the font of the text field
     open var font: UIFont? {
         get {
             return inputField.font
@@ -315,28 +294,22 @@ extension UIActiveInput {
         }
     }
     
-    /**
-     Gets or sets the text color for the text field
-    */
+    /// Gets or sets the text color for the text field
     open var textColor: UIColor? {
         get {
             return inputField.textColor
         }
         set {
-            inputField.textColor = textColor
+            inputField.textColor = newValue
         }
     }
     
-    /**
-     Returns the CALayer for the text field
-    */
+    /// Returns the CALayer for the text field
     open var inputLayer: CALayer {
         return inputField.layer
     }
     
-    /**
-     Gets or sets the keyboardType for the text field
-    */
+    /// Gets or sets the keyboardType for the text field
     open var keyboardType: UIKeyboardType {
         get {
             return inputField.keyboardType
@@ -382,9 +355,7 @@ fileprivate extension UIActiveInput {
 
 fileprivate extension UIActiveInput {
     
-    /**
-     Called when the input has gained focus
-    */
+    /// Called when the input has gained focus
     func hasGainedFocus() {
         if activeIndicatorView.alpha == 1 {
             return
@@ -396,9 +367,7 @@ fileprivate extension UIActiveInput {
         })
     }
     
-    /**
-     Called when the input has lost focus
-     */
+    /// Called when the input has lost focus
     func hasLostFocus() {
         if activeIndicatorView.alpha == 0 {
             return
@@ -476,9 +445,18 @@ fileprivate extension UIActiveInput {
         let margins = layoutMarginsGuide
         
         // Alignment
-        label.leadingAnchor.constraint(equalTo: margins.leadingAnchor, constant: indicatorWidth).isActive = true
-        label.heightAnchor.constraint(equalToConstant: totalHeight - layoutMargins.top - layoutMargins.bottom)
-        label.lastBaselineAnchor.constraint(equalTo: inputField.lastBaselineAnchor).isActive = true // align with the input's baseline so things are align vertically
+        label.leadingAnchor.constraint(
+            equalTo: margins.leadingAnchor,
+            constant: indicatorWidth
+        ).isActive = true
+        
+        label.heightAnchor.constraint(
+            equalToConstant: totalHeight - layoutMargins.top - layoutMargins.bottom
+        ).isActive = true
+        
+        label.centerYAnchor.constraint(
+            equalTo: inputField.centerYAnchor
+        ).isActive = true // Align with the input's baseline so things are aligned vertically.
         
         if let labelWidth = forcedLabelWidth {
             label.widthAnchor.constraint(equalToConstant: labelWidth).isActive = true
@@ -496,10 +474,21 @@ fileprivate extension UIActiveInput {
         let margins = layoutMarginsGuide
         
         // Alignment
-        activeIndicatorView.topAnchor.constraint(equalTo: margins.topAnchor, constant: -layoutMargins.top).isActive = true
-        activeIndicatorView.leftAnchor.constraint(equalTo: margins.leftAnchor, constant: -layoutMargins.left).isActive = true
-        activeIndicatorView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: layoutMargins.bottom).isActive = true
-        activeIndicatorView.widthAnchor.constraint(equalToConstant: indicatorWidth).isActive = true
+        activeIndicatorView.topAnchor.constraint(
+            equalTo: margins.topAnchor,
+            constant: -layoutMargins.top
+        ).isActive = true
+        
+        activeIndicatorView.leftAnchor.constraint(
+            equalTo: margins.leftAnchor,
+            constant: -layoutMargins.left).isActive = true
+        
+        activeIndicatorView.bottomAnchor.constraint(
+            equalTo: margins.bottomAnchor,
+            constant: layoutMargins.bottom).isActive = true
+        
+        activeIndicatorView.widthAnchor.constraint(
+            equalToConstant: indicatorWidth).isActive = true
         
         // Compression
         activeIndicatorView.setContentCompressionResistancePriority(.required, for: .vertical)

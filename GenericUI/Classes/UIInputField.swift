@@ -3,21 +3,20 @@
 //  FormView
 //
 //  Created by Thomas Lextrait on 12/19/17.
-//  Copyright © 2017 LycheeApps. All rights reserved.
+//  Copyright © 2017-2020 LycheeApps. All rights reserved.
 //
 
 import UIKit
 
-/**
- Simple generic subclass for UITextField
- Note: we just assume the string input is convertible to the generic type
- */
+/// Simple generic subclass for UITextField
+/// - Note: we just assume the string input is convertible to the generic type
 open class UIInputField<OutputType : StringTwoWayConvertible>: UITextField {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
+    @available(*, unavailable)
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

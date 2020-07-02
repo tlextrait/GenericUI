@@ -13,9 +13,10 @@ fileprivate class Person {
     var lastname = ""
     var address = ""
     var age: UInt = 0
+    var zip = ""
 }
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     fileprivate let userForm = UIQuickFormView<Person>()
 
@@ -23,11 +24,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         setupViews()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
     }
     
     private func setupViews() {
@@ -95,17 +91,33 @@ class ViewController: UIViewController {
             return (true, nil)
         }
         
-        let userFormTitle = UILabel(frame: .zero)
+        let zipCodeField = UIActiveInput<String>(label: "Zip Code")
+        let idZip = userForm.bind(input: zipCodeField) { (person, input) in
+            person.zip = input.output ?? ""
+            return (true, nil)
+        }
+        
+        let userFormTitle = UILabel()
         userFormTitle.text = "User Form"
         userFormTitle.font = UIFont.systemFont(ofSize: 16.0)
         userFormTitle.textColor = .black
         let idTitle = userForm.bind(view: userFormTitle)
+        
+        let secondTitle = UILabel()
+        secondTitle.text = "Second Title"
+        secondTitle.font = UIFont.systemFont(ofSize: 16.0)
+        secondTitle.textColor = .black
+        let idSecondTitle = userForm.bind(view: secondTitle)
         
         // Lay things out on the form
         userForm.addRow([FormElement(idTitle)])
         userForm.addRow([FormElement(idFirstname, size: 2), FormElement(idLastname, size: 1)])
         userForm.addRow([FormElement(idAddress)])
         userForm.addRow([FormElement(idAge), FormElement.spacer(size: 2)])
+        userForm.addRow([FormElement.spacer(size: 1)])
+        userForm.addRow([FormElement(idSecondTitle)])
+        userForm.addRow([FormElement(idZip, size: 1), FormElement.spacer(size: 1)])
+        
         
         // Form constraints
         userForm.translatesAutoresizingMaskIntoConstraints = false

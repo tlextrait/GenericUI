@@ -3,6 +3,7 @@
 //  FormView
 //
 //  Created by Thomas Lextrait on 12/19/17.
+//  Copyright © 2017-2020 LycheeApps. All rights reserved.
 //
 
 import UIKit
@@ -11,22 +12,16 @@ import UIKit
 // MARK: - Quick Form
 //
 
-/**
- UIQuickFormView allows to easily setup a complex form for gathering OutputModel from the user
- Simply initialize the form, use bind() to bind your inputs and views to the form, addRow() to
- tell the form where to put the inputs/views and how to lay them, and just call resolve()
- when you want to produce the OutputModel from the values in the inputs
- */
+/// UIQuickFormView allows to easily setup a complex form for gathering OutputModel from the user
+/// Simply initialize the form, use bind() to bind your inputs and views to the form, addRow() to
+/// tell the form where to put the inputs/views and how to lay them, and just call resolve()
+/// when you want to produce the OutputModel from the values in the inputs
 open class UIQuickFormView<OutputModel> : UIView {
     
-    /*
-     bindings organized by row, the way they should come out visually (the UUID is used to look up the bindings in the index)
-     */
+    /// Bindings organized by row, the way they should come out visually (the UUID is used to look up the bindings in the index)
     private var viewsAndInputs = [[FormElement]]()
     
-    /*
-     maps a UUID to a UIQuickFormBinding, has to be Any because there are mixed types
-     */
+    /// Maps a UUID to a UIQuickFormBinding, has to be Any because there are mixed types
     private var bindingIndex = [UUID : AbstractGenericFormBinding<OutputModel>]()
     
     // UI Settings
@@ -46,31 +41,25 @@ open class UIQuickFormView<OutputModel> : UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    /**
-     Binds an input to a setter, allowing the form to build the output model
-     @param input: UIView
-     @param binding callback that takes a model and input, returns a boolean indicating success and an error if applicable
-     */
+    /// Binds an input to a setter, allowing the form to build the output model
+    /// - parameter input: UIView
+    /// - parameter binding callback that takes a model and input, returns a boolean indicating success and an error if applicable
     open func bind<Field : UIView>(input: Field, binding: @escaping (inout OutputModel, Field)->(Bool, Error?)) -> UUID {
         let formBind = UIQuickFormBinding(input: input, binding: binding)
         bindingIndex[formBind.identifier] = formBind
         return formBind.identifier
     }
     
-    /**
-     Binds a view
-     @param UIView
-     */
+    /// Binds a view
+    /// - parameter UIView
     open func bind(view: UIView) -> UUID {
         let binding = UIQuickFormBinding<UIView, OutputModel>(view: view)
         bindingIndex[binding.identifier] = binding
         return binding.identifier
     }
     
-    /**
-     Adds a row of views to the form, by their identifiers
-     @param array of FormElement
-     */
+    /// Adds a row of views to the form, by their identifiers
+    /// - parameter elements: array of FormElement
     open func addRow(_ elements: [FormElement]) {
         for el in elements {
             assert(el.isSpacer || hasBinding(for: el), "Tried to add an input that has no binding")
@@ -82,11 +71,9 @@ open class UIQuickFormView<OutputModel> : UIView {
         }))
     }
     
-    /**
-     Resolves the output for this form by asking all its inputs to resolve their values
-     @param OutputModel: model ready to be filled out with the form inputs
-     @return (Bool, [Error]): tuple with a boolean indicating success and an error of any errors occurred
-     */
+    /// Resolves the output for this form by asking all its inputs to resolve their values
+    /// - parameter OutputModel: model ready to be filled out with the form inputs
+    /// - returns: (Bool, [Error]) tuple with a boolean indicating success and an error of any errors occurred
     open func resolve(model: inout OutputModel) -> (Bool, [Error]) {
         
         var errors = [Error]()
@@ -157,9 +144,7 @@ extension UIQuickFormView {
         setContentHuggingPriority(.defaultLow, for: .vertical)
     }
     
-    /**
-     This effectively builds the UI. Do not call this to refresh the UI as it is destructive.
-    */
+    /// This effectively builds the UI. Do not call this to refresh the UI as it is destructive.
     open func build() {
         // Remove everything from the view to start over if necessary
         if !subviews.isEmpty {
@@ -168,7 +153,6 @@ extension UIQuickFormView {
             }
         }
         
-        // @TODO: Needed?
         translatesAutoresizingMaskIntoConstraints = false
         
         var firstViewInPreviousRow: UIView?
@@ -207,36 +191,53 @@ extension UIQuickFormView {
                 
                 // Top
                 if isFirstRow {
-                    view.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor).isActive = true
+                    view.topAnchor.constraint(
+                        equalTo: layoutMarginsGuide.topAnchor
+                    ).isActive = true
                 } else {
-                    view.topAnchor.constraint(equalTo: firstViewInPreviousRow!.bottomAnchor, constant: viewVerticalSpacing).isActive = true
+                    view.topAnchor.constraint(
+                        equalTo: firstViewInPreviousRow!.bottomAnchor,
+                        constant: viewVerticalSpacing
+                    ).isActive = true
                 }
                 
                 // Left
                 if isFirstViewInThisRow {
-                    view.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor).isActive = true
+                    view.leadingAnchor.constraint(
+                        equalTo: layoutMarginsGuide.leadingAnchor
+                    ).isActive = true
                 } else {
-                    view.leadingAnchor.constraint(equalTo: previousViewInSameRow!.trailingAnchor, constant: viewHorizontalSpacing).isActive = true
+                    view.leadingAnchor.constraint(
+                        equalTo: previousViewInSameRow!.trailingAnchor,
+                        constant: viewHorizontalSpacing
+                    ).isActive = true
                 }
                 
                 // Right
                 if isLastViewInThisRow {
-                    view.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor).isActive = true
+                    view.trailingAnchor.constraint(
+                        equalTo: layoutMarginsGuide.trailingAnchor
+                    ).isActive = true
                 }
                 
                 // Bottom
                 if isLastRow {
-                    view.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor).isActive = true
+                    view.bottomAnchor.constraint(
+                        equalTo: layoutMarginsGuide.bottomAnchor
+                    ).isActive = true
                 }
                 
                 // Width
                 let sizeMultiplier: CGFloat = row.count > 1 ? CGFloat(viewSize.size) / CGFloat(rowTotalSize) : 1.0
-                view.widthAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.widthAnchor, multiplier: sizeMultiplier).isActive = true
+                view.widthAnchor.constraint(
+                    lessThanOrEqualTo: layoutMarginsGuide.widthAnchor,
+                    multiplier: sizeMultiplier
+                ).isActive = true
                 
                 // Height
                 if row.count == 1 && viewSize.isSpacer {
                     // if the only view in the row is a spacer, then it needs a height because the UIView has no intrinsinct height
-                    view.heightAnchor.constraint(equalToConstant: defaultSpacerHeight)
+                    view.heightAnchor.constraint(equalToConstant: defaultSpacerHeight).isActive = true
                 }
                 
                 if firstViewInPreviousRow == nil {
@@ -252,9 +253,7 @@ extension UIQuickFormView {
         }
     }
     
-    /**
-     Maps all the bindings and form elements into appropriate views, ordered by row. Detects spacers and converts them to UIView
-    */
+    /// Maps all the bindings and form elements into appropriate views, ordered by row. Detects spacers and converts them to UIView
     open var mappedViews: [[ViewSize]] {
         return viewsAndInputs.map { (farray: [FormElement]) -> [ViewSize] in
             return farray.map({ (f: FormElement) -> ViewSize in
@@ -329,10 +328,8 @@ fileprivate protocol ResolvableBinding: class {
     var view: UIView { get }
 }
 
-/**
- AbstractGenericFormBinding is used as an abstract that only carries the OutputModel generic.
- This allows UIQuickFormView to reference multiple bindings for mixed types of inputs but the same output model
- */
+/// AbstractGenericFormBinding is used as an abstract that only carries the OutputModel generic.
+/// This allows UIQuickFormView to reference multiple bindings for mixed types of inputs but the same output model
 fileprivate class AbstractGenericFormBinding<OutputModelType> : ResolvableBinding {
     typealias ModelType = OutputModelType
     
@@ -354,9 +351,7 @@ fileprivate class AbstractGenericFormBinding<OutputModelType> : ResolvableBindin
     }
 }
 
-/**
- Binds a form input to a keypath on a model
- */
+/// Binds a form input to a keypath on a model
 fileprivate class UIQuickFormBinding<InputType : UIView, ModelType> : AbstractGenericFormBinding<ModelType> {
     var viewElement: UIView?
     var input: InputType?
