@@ -1,4 +1,4 @@
-osx_image: xcode10.1
+osx_image: xcode11.5
 language: swift
 xcode_scheme: GenericUI_Example
 
