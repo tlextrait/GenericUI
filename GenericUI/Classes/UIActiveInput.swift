@@ -40,6 +40,12 @@ open class UIActiveInput<OutputType : StringTwoWayConvertible & BestKeyboardType
         self.label.text = label
     }
     
+    @available(*, unavailable)
+    init() {
+        fatalError("init() has not been implemented")
+    }
+    
+    @available(*, unavailable)
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -444,9 +450,9 @@ fileprivate extension UIActiveInput {
             constant: indicatorWidth
         ).isActive = true
         
-        label.heightAnchor.constraint(
-            equalToConstant: totalHeight - layoutMargins.top - layoutMargins.bottom
-        ).isActive = true
+//        label.heightAnchor.constraint(
+//            equalToConstant: totalHeight - layoutMargins.top - layoutMargins.bottom
+//        ).isActive = true
         
         label.lastBaselineAnchor.constraint(
             equalTo: inputField.lastBaselineAnchor
