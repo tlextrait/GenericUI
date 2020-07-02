@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GenericUI'
-  s.version          = '0.2.4'
+  s.version          = '0.2.5'
   s.summary          = 'Generic UI provides you with beautiful and generic UI components for your iOS projects.'
 
 # This description is used to generate tags and improve search results.
@@ -31,7 +31,7 @@ GenericUI provides you with beautiful and generic UI elements for your iOS proje
   s.source_files = 'GenericUI/Classes/*'
   s.frameworks = 'UIKit'
 
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.2' }
-  s.swift_version = '4.2'
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '5.2' }
+  s.swift_version = '5.2'
 
 end
