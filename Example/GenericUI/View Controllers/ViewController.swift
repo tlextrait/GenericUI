@@ -91,7 +91,7 @@ final class ViewController: UIViewController {
             return (true, nil)
         }
         
-        let zipCodeField = UIActiveInput<String>(label: "ZIP CODE")
+        let zipCodeField = UIActiveInput<String>(label: "Zip Code")
         let idZip = userForm.bind(input: zipCodeField) { (person, input) in
             person.zip = input.output ?? ""
             return (true, nil)

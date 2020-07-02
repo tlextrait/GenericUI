@@ -450,13 +450,13 @@ fileprivate extension UIActiveInput {
             constant: indicatorWidth
         ).isActive = true
         
-//        label.heightAnchor.constraint(
-//            equalToConstant: totalHeight - layoutMargins.top - layoutMargins.bottom
-//        ).isActive = true
+        label.heightAnchor.constraint(
+            equalToConstant: totalHeight - layoutMargins.top - layoutMargins.bottom
+        ).isActive = true
         
-        label.lastBaselineAnchor.constraint(
-            equalTo: inputField.lastBaselineAnchor
-        ).isActive = true // align with the input's baseline so things are align vertically
+        label.centerYAnchor.constraint(
+            equalTo: inputField.centerYAnchor
+        ).isActive = true // Align with the input's baseline so things are aligned vertically.
         
         if let labelWidth = forcedLabelWidth {
             label.widthAnchor.constraint(equalToConstant: labelWidth).isActive = true
